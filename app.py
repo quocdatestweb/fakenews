@@ -2,7 +2,6 @@ import os
 import pathlib
 from flask import Flask, render_template, request, abort, redirect, url_for, session
 from sklearn.feature_extraction.text import TfidfVectorizer
-from keras.preprocessing.text import Tokenizer
 from sklearn.linear_model import PassiveAggressiveClassifier
 import pickle
 import pandas as pd
@@ -22,7 +21,6 @@ import google.auth.transport.requests
 import requests
 from pyvi import ViTokenizer
 from transformers import T5ForConditionalGeneration,T5Tokenizer
-from keras.utils import pad_sequences
 import torch
 import cloudinary
 from cloudinary.utils import cloudinary_url
