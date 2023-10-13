@@ -31,7 +31,7 @@ from pymongo import MongoClient
 from bson.objectid import ObjectId
 import random
 tfvect = TfidfVectorizer(analyzer='word', max_features=4189, ngram_range=(1, 2))
-loaded_model = pickle.load(open('model\model.pkl', 'rb'))
+loaded_model = pickle.load(open('model/model.pkl', 'rb'))
 dataframe = pd.read_csv('data_new.csv',on_bad_lines='skip')
 dataframe.reset_index(inplace = True)
 dataframe.drop(["index"], axis = 1, inplace = True)
