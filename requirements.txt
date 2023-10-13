@@ -53,3 +53,4 @@ cloudinary
 transformers
 torch
 sentencepiece
+keras
