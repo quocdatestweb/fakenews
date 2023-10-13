@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Tivo is a HTML landing page template built with Bootstrap to help you crate engaging presentations for SaaS apps and convert visitors into users.">
+    <meta name="author" content="Inovatik">
+
+    <!-- Website Title -->
+    <title>Phát hiện tin giả bằng Machine Learning </title>
+    <!-- Styles -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700&display=swap&subset=latin-ext" rel="stylesheet">
+    <link href="{{ url_for('static',filename='css/bootstrap.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static',filename='css/fontawesome-all.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static',filename='css/styles.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static',filename='css/swiper.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static',filename='css/magnific-popup.css') }}" rel="stylesheet">
+
+    <!-- <link href="css/fontawesome-all.css" rel="stylesheet">
+    <link href="css/swiper.css" rel="stylesheet">
+	<link href="css/magnific-popup.css" rel="stylesheet">
+	<link href="css/styles.css" rel="stylesheet"> -->
+
+    <!-- Favicon  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer"
+    />
+    <link rel="icon" href="https://media1.giphy.com/media/f9xvcrzFdRaHATv6me/giphy.gif?cid=6c09b95256e366c2930ac6483563c01a1c5f9a6d8e1e27ce&rid=giphy.gif&ct=s">
+</head>
+
+<body data-spy="scroll" data-target=".fixed-top">
+
+    <!-- Preloader -->
+    <div class="spinner-wrapper">
+        <div class="spinner">
+            <div class="bounce1"></div>
+            <div class="bounce2"></div>
+            <div class="bounce3"></div>
+        </div>
+    </div>
+    <!-- end of preloader -->
+
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
+        <div class="container">
+
+            <!-- Text Logo - Use this if you don't have a graphic logo -->
+            <!-- <a class="navbar-brand logo-text page-scroll" href="index.html">Tivo</a> -->
+
+            <!-- Image Logo -->
+            <div class="navbar-brand" href="index.html">
+                {{name_1}} {% if not pictures %}
+                <h6 class="text-white"></h6><img width="90" style="height: auto; border-radius: 50%;" src="https://media1.giphy.com/media/f9xvcrzFdRaHATv6me/giphy.gif?cid=6c09b95256e366c2930ac6483563c01a1c5f9a6d8e1e27ce&rid=giphy.gif&ct=s" alt="alternative"></h6>{% else %}
+                <h6 class="text-white"><img style="border-radius: 50%;" width="45" class="img-rounded" src="{{ pictures }}" alt="User Logo"> Xin chào {{names}}</h6>
+                {% endif %}
+            </div>
+
+            <!-- Mobile Menu Toggle Button -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-awesome fas fa-bars"></span>
+                <span class="navbar-toggler-awesome fas fa-times"></span>
+            </button>
+            <!-- end of mobile menu toggle button -->
+
+            <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link page-scroll" href="#header">TRANG CHỦ <span
+                                class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link page-scroll" href="{{ url_for('forum')}}">DIỄN ĐÀN</a>
+                    </li>
+                    <!-- <li class="nav-item">
+                        <a class="nav-link page-scroll" href="#details">TIN GIẢ</a>
+                    </li> -->
+
+                    <!-- Dropdown Menu -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle page-scroll" href="" id="navbarDropdown" role="button" aria-haspopup="true" aria-expanded="false">HƯỚNG DẪN</a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{{ url_for('detectfakenews')}}"><span class="item-text">HƯỚNG
+                                    DẪN CÁCH NHẬN BIẾT, PHÒNG TRÁNH TIN GIẢ </span></a>
+                            <div class="dropdown-items-divide-hr"></div>
+                            <a class="dropdown-item" href="{{ url_for('usermanual')}}"><span class="item-text">HƯỚNG DẪN
+                                    SỬ DỤNG TRANG WEB </span></a>
+                        </div>
+                    </li>
+                    <!-- end of dropdown menu -->
+
+                    <li class="nav-item">
+                        <a class="nav-link page-scroll" href="{{ url_for('check')}}">KIỂM TRA</a>
+                    </li>
+                    
+                    {% if not names %}
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link page-scroll" href="{{ url_for('post')}}">ĐĂNG BÀI</a>
+                    </li>
+                    {% endif %}
+                 
+                </ul>
+                <span class="nav-item">
+                    {% if not names %}
+                    <a class="btn-outline-sm" href="{{ url_for('login')}}"><i class="fa-brands fa-google"></i> ĐĂNG
+                        NHẬP</a>
+                    {% else %}
+                    <a class="btn-outline-sm" href="{{ url_for('logout')}}"><i
+                            class="fa-solid fa-right-from-bracket"></i> ĐĂNG XUẤT</a>
+                    {% endif %}
+                </span>
+            </div>
+        </div>
+        <!-- end of container -->
+    </nav>
+    <!-- end of navbar -->
+    <!-- end of navigation -->
+
+
+    <!-- Header -->
+    <header id="header" class="header">
+        <div class="header-content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 col-xl-5">
+                        <div class="text-container">
+                            <h2 class="text-white typedtext"></h2>
+                            <p class="p-large">Ứng dụng hỗ trợ phát hiện tin giả và đề xuất nội dung chính xác cho người Việt Nam.</p>
+                            <a class="btn-solid-lg page-scroll" href="#details">Bắt đầu</a>
+                        </div>
+                        <!-- end of text-container -->
+                    </div>
+                    <!-- end of col -->
+                    <div class="col-lg-6 col-xl-7">
+                        <div class="image-container">
+                            <div class="img-wrapper">
+                                <img class="img-fluid" src="{{ url_for('static',filename='images/header-software-app.png') }}" alt="alternative">
+                              <!-- <img class="img-fluid" src="https://htmlrev.com/preview/tivo/images/header.svg" alt="alternative"> -->
+                            </div>
+                            <!-- end of img-wrapper -->
+                        </div>
+                        <!-- end of image-container -->
+                    </div>
+                    <!-- end of col -->
+                </div>
+                <!-- end of row -->
+            </div>
+            <!-- end of container -->
+        </div>
+        <!-- end of header-content -->
+    </header>
+    <!-- end of header -->
+    <svg class="header-frame" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" viewBox="0 0 1920 310">
+        <defs>
+            <style>
+                .cls-1 {
+                    fill: #5f4def;
+                }
+            </style>
+        </defs>
+        <title>header-frame</title>
+        <path class="cls-1"
+            d="M0,283.054c22.75,12.98,53.1,15.2,70.635,14.808,92.115-2.077,238.3-79.9,354.895-79.938,59.97-.019,106.17,18.059,141.58,34,47.778,21.511,47.778,21.511,90,38.938,28.418,11.731,85.344,26.169,152.992,17.971,68.127-8.255,115.933-34.963,166.492-67.393,37.467-24.032,148.6-112.008,171.753-127.963,27.951-19.26,87.771-81.155,180.71-89.341,72.016-6.343,105.479,12.388,157.434,35.467,69.73,30.976,168.93,92.28,256.514,89.405,100.992-3.315,140.276-41.7,177-64.9V0.24H0V283.054Z" />
+    </svg>
+    <!-- end of header -->
+
+    <div id="details" class="basic-1">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="text-container">
+                        <h2>Phát Hiện Tự Động Tin Giả</h2>
+                        <p>Việc phát hiện tin giả một cách thủ công thường liên quan đến tất cả các kỹ thuật và quy trình mà một người có thể sử dụng để xác minh tin tức. Tuy nhiên, lượng dữ liệu trực tuyến được tạo ra hàng ngày là quá lớn.</p>
+                        <p> Hệ thống phát hiện tự động tin giả sẽ giúp xác minh một tin tức là giả hay thật mà không cần sự can thiệp trực tiếp của con người. Có nhiều kỹ thuật và cách tiếp cận khác nhau được sử dụng trong nghiên cứu phát hiện tin giả. Các
+                            kỹ thuật và cách tiếp cận này phụ thuộc vào quan điểm và mục đích truy vết của người phát triển.</p>
+                        {% if not names %}
+                        <a class="btn-solid-reg page-scroll" href="{{ url_for('login')}}"><i
+                                class="fa-brands fa-google"></i> ĐĂNG NHẬP</a> {% else %} {% endif %}
+
+                    </div>
+                    <!-- end of text-container -->
+                </div>
+                <!-- end of col -->
+                <div class="col-lg-6">
+                    <div class="image-container">
+                        <img class="d-block w-100" src="https://i.pinimg.com/originals/99/9c/bc/999cbcc7ec57f636ac8315f2c3ce8ce6.jpg" alt="First slide">
+
+                        <!-- <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                            <div class="carousel-inner">
+                              <div class="carousel-item active">
+                                <img class="d-block w-100" src="https://www.bing.com/images/blob?bcid=S5bUYMOSMIQFqxcxoNWLuD9SqbotqVTdPzk" alt="First slide">
+                         <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                            <div class="carousel-inner">
+                              <div class="carousel-item active">
+                                <img class="d-block w-100" src="https://i.pinimg.com/originals/99/9c/bc/999cbcc7ec57f636ac8315f2c3ce8ce6.jpg" alt="First slide">
+                              </div>
+                              <div class="carousel-item">
+                                <img class="d-block w-100" src="https://img.graphicsurf.com/2020/10/fake-news-flat-illustration-768x512.jpg" alt="Second slide">
+                              </div>
+                              <div class="carousel-item">
+                                <img class="d-block w-100" src="https://image.freepik.com/free-vector/businessmen-characters-interacting-with-charts-analysing-statistics-office-work-concept-team-partnership_175690-112.jpg" alt="Third slide">
+                              </div>
+                            </div>
+                            <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                              <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                              <span class="sr-only">Next</span>
+                            </a>
+                          </div> -->
+                    </div>
+                    <!-- end of image-container -->
+                </div>
+                <!-- end of col -->
+            </div>
+            <!-- end of row -->
+        </div>
+        <!-- end of container -->
+    </div>
+    <!-- Copyright -->
+    <div class="copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <p class="p-small">Copyright &copy; 2023. All Rights Reserved.</a>
+                    </p>
+                </div>
+                <!-- end of col -->
+            </div>
+            <!-- enf of row -->
+        </div>
+        <!-- end of container -->
+    </div>
+    <!-- end of copyright -->
+    <!-- end of copyright -->
+
+
+    <!-- Scripts -->
+    <script src="{{ url_for('static',filename='js/jquery.min.js') }}">
+    </script>
+    <script src="{{ url_for('static',filename='js/popper.min.js') }}">
+    </script>
+    <script src="{{ url_for('static',filename='js/bootstrap.min.js') }}">
+    </script>
+    <script src="{{ url_for('static',filename='js/jquery.easing.min.js') }}">
+    </script>
+    <script src="{{ url_for('static',filename='js/swiper.min.js.js') }}">
+    </script>
+    <script src="{{ url_for('static',filename='js/jquery.magnific-popup.js') }}">
+    </script>
+    <script src="{{ url_for('static',filename='js/validator.min.js') }}">
+    </script>
+    <script src="{{ url_for('static',filename='js/scripts.js') }}">
+    </script>
+
+    <script>
+        function typingEffect() {
+            const contactTexts = shuffleArray(['Hệ thống phát hiện tin giả bằng Machine Learning và Deep Learning']);
+            const typedtext = document.getElementsByClassName("typedtext")[0];
+            let removing = false;
+            let idx = char = 0;
+            setInterval(() => { // We define the interval of the typing speed
+                // If we do not reach the limit, we insert characters in the html
+                if (char < contactTexts[idx].length) typedtext.innerHTML += contactTexts[idx][char];
+                // 15*150ms = time before starting to remove characters
+                if (char == contactTexts[idx].length + 15) removing = true;
+                // Removing characters, the last one always
+                if (removing) typedtext.innerHTML = typedtext.innerHTML.substring(0, typedtext.innerHTML.length - 1);
+                char++; // Next character
+                // When there is nothing else to remove
+                if (typedtext.innerHTML.length === 0) {
+                    // If we get to the end of the texts we start over
+                    if (idx === contactTexts.length - 1) idx = 0
+                    else idx++;
+                    char = 0; // Start the next text by the first character
+                    removing = false; // No more removing characters
+                }
+            }, 70); // Typing speed, 70 ms
+
+        }
+        typingEffect();
+
+        function shuffleArray(array) {
+            let currentIndex = array.length,
+                temporaryValue, randomIndex;
+
+            // While there remain elements to shuffle...
+            while (0 !== currentIndex) {
+
+                // Pick a remaining element...
+                randomIndex = Math.floor(Math.random() * currentIndex);
+                currentIndex -= 1;
+
+                // And swap it with the current element.
+                temporaryValue = array[currentIndex];
+                array[currentIndex] = array[randomIndex];
+                array[randomIndex] = temporaryValue;
+            }
+
+            return array;
+        }
+    </script>
+
+</body>
+
+</html>

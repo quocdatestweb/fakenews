@@ -1,0 +1,335 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phát hiện tin giả bằng Machine Learning </title>
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/dashboard.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- Box Icons -->
+    <link rel="icon"
+        href="https://media1.giphy.com/media/f9xvcrzFdRaHATv6me/giphy.gif?cid=6c09b95256e366c2930ac6483563c01a1c5f9a6d8e1e27ce&rid=giphy.gif&ct=s">
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+
+
+</head>
+
+<body>
+    <div class="main">
+        <div class="side-navbar">
+            <ul>
+                <li><a href="#">
+                        <span id="menu-icon" class="icon"><i class='bx bx-menu'></i></span>
+                    </a></li>
+                <li><a href="#">
+                        <span class="icon"><i class='bx bxs-home-circle'></i></span>
+                        <span class="text">Trang chủ</span>
+                    </a></li>
+                <li><a href="SinhVien.html">
+                        <span class="icon"><i class='bx bxs-bug'></i></span>
+                        <span class="text">Quản lý hệ thống</span>
+                    </a></li>
+                <!-- <li><a href="#">
+                        <span class="icon"><i class='bx bxs-search-alt-2'></i></span>
+                        <span class="text">Tìm kiếm bài viết</span>
+                    </a></li> -->
+                <li><a href="TinChi.html">
+                        <span class="icon"><i class='bx bxs-book-content'></i></span>
+                        <span class="text">Quản lý bài viết</span>
+                    </a></li>
+                    <li><a href="TinChi.html">
+                        <span class="icon"><i class='bx bxs-chat'></i></span>
+                        <span class="text">Quản lý diễn đàn</span>
+                    </a></li>
+                <li><a href="TinChi.html">
+                        <span class="icon"><i class='bx bxs-flag'></i></span>
+                        <span class="text">Quản lý phản ánh</span>
+                </a></li>
+                <li><a href="{{ url_for('logout')}}">
+                        <span class="icon"><i class='bx bxs-log-out'></i></span>
+                        <span class="text">Đăng xuất</span>
+                    </a></li>
+            </ul>
+        </div>
+        <div class="content">
+            <div class="top-navbar">
+                <div class="profile">
+                    <img src="https://th.bing.com/th/id/R.10b77511c4f2710becf8736511c3eaa6?rik=VwNYt%2bS7N52Y0A&pid=ImgRaw&r=0"
+                        alt=""> Xin chào Admin 
+                </div>
+            </div>
+            <div class="container-fluid">
+                <br>
+              <table id="myTable" class="table table-bordered">
+                <div class="ex-basic-2">
+                    <div class="container">
+                        <h4>Chính sách, pháp luật</h4>
+                        <div class="row">
+                            
+                            {% for laws in law %}
+                            <div class="col-lg-4 col-md-6 mb-4">
+                                <div class="card h-100">
+                                    <img class="card-img-top" src="{{ url_for('static',filename='images/video-image.png') }}" data-holder-rendered="true">
+                                    <!-- <div class="card-body">
+                                      <h4 class="card-title">Card title</h4>
+                                      <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                    </div> -->
+                                    <div class="card-body">
+                                        <a style="overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; /* number of lines to show */ line-clamp: 1; -webkit-box-orient: vertical;" class="card-text blue" href="view/{{laws._id}}" class="btn btn-sm btn-secondary">{{laws.Title }}</a>
+                                       {% if laws.Label == 1 %}
+                                       <span class="badge badge-success">Tin thật</span>
+                                       {% else %}
+                                       <span class="badge badge-danger">Tin giả</span>
+                                       {% endif %} 
+                                       <div class="d-flex justify-content-between align-items-center">
+                                        
+                                       </div>
+                                     </div>
+                                </div>
+                             </div>
+                             {% endfor %}
+                        </div>
+                        <nav aria-label="Page navigation">
+                            <ul class="pagination justify-content-center"></ul>
+                          </nav>
+                        <h4>Thiên tai, dịch bệnh</h4>
+                        <div class="row">
+                            {% for disasters in disaster %}
+                             <div class="col-md-4">
+                               <div class="card mb-4 box-shadow">
+                                <img class="card-img-top" src="{{ url_for('static',filename='images/video-image.png') }}" data-holder-rendered="true">
+                                 <div class="card-body">
+                                    <a style="overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; /* number of lines to show */ line-clamp: 1; -webkit-box-orient: vertical;" class="card-text blue" href="view/{{disasters._id}}" class="btn btn-sm btn-secondary">{{disasters.Title }}</a>
+                                   {% if disasters.Label == 1 %}
+                                   <span class="badge badge-success">Tin thật</span>
+                                   {% else %}
+                                   <span class="badge badge-danger">Tin giả</span>
+                                   {% endif %} 
+                                   <div class="d-flex justify-content-between align-items-center">
+                                   
+                                   </div>
+                                 </div>
+                               </div>
+                             </div>
+                             {% endfor %}
+                        </div>
+                        <nav aria-label="Page navigation">
+                            <ul class="pagination justify-content-center"></ul>
+                          </nav>
+                        <h4>Kinh tế, chính trị</h4>
+                        <div class="row">
+                            {% for ecomomys in ecomomy %}
+                             <div class="col-md-4">
+                               <div class="card mb-4 box-shadow">
+                                <img class="card-img-top" src="https://th.bing.com/th/id/OIP.a-iy8z5ZcZ0D7HzaKSgOmwHaEK?pid=ImgDet&w=696&h=392&rs=1" data-holder-rendered="true">
+                                 <div class="card-body">
+                                    <p style="overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 1; /* number of lines to show */ line-clamp: 1; -webkit-box-orient: vertical;" class="card-text blue">{{ ecomomys.Title }}</p>
+                                   {% if ecomomys.Label == 1 %}
+                                   <span class="badge badge-success">Tin thật</span>
+                                   {% else %}
+                                   <span class="badge badge-danger">Tin giả</span>
+                                   {% endif %} 
+                                   <div class="d-flex justify-content-between align-items-center">
+                                     <div class="btn-group">
+                                       <a  style="text-decoration: none" href="view/{{ecomomys._id}}" class="btn btn-sm btn-secondary">Xem ngay</a>
+                                     </div>
+                                   </div>
+                                 </div>
+                               </div>
+                             </div>
+                             {% endfor %}
+                             
+                        </div>
+                        <nav aria-label="Page navigation">
+                            <ul class="pagination justify-content-center"></ul>
+                          </nav>
+                        <h4>Lĩnh vực y tế, sản phẩm y tế liên quan đến sức khỏe con người</h4>
+                        <div class="row">
+                            {% for healths in health %}
+                             <div class="col-md-4">
+                               <div class="card mb-4 box-shadow">
+                                <img class="card-img-top" src="https://th.bing.com/th/id/OIP.a-iy8z5ZcZ0D7HzaKSgOmwHaEK?pid=ImgDet&w=696&h=392&rs=1" data-holder-rendered="true">
+                                 <div class="card-body">
+                                    <p style="overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 1; /* number of lines to show */ line-clamp: 1; -webkit-box-orient: vertical;" class="card-text blue">{{ healths.Title }}</p>
+                                   {% if healths.Label == 1 %}
+                                   <span class="badge badge-success">Tin thật</span>
+                                   {% else %}
+                                   <span class="badge badge-danger">Tin giả</span>
+                                   {% endif %} 
+                                   <div class="d-flex justify-content-between align-items-center">
+                                     <div class="btn-group">
+                                       <a  style="text-decoration: none" href="view/{{healths._id}}" class="btn btn-sm btn-secondary">Xem ngay</a>
+                                     </div>
+                                   </div>
+                                 </div>
+                               </div>
+                             </div>
+                             {% endfor %}
+
+                        </div>
+                        <nav aria-label="Page navigation">
+                            <ul class="pagination justify-content-center"></ul>
+                          </nav>
+                        <h4>An ninh quốc gia, Trật tự an toàn – xã hội</h4>
+                        <div class="row">
+                            {% for seciuritys in seciurity %}
+                             <div class="col-md-4">
+                               <div class="card mb-4 box-shadow">
+                                <img class="card-img-top" src="https://th.bing.com/th/id/OIP.a-iy8z5ZcZ0D7HzaKSgOmwHaEK?pid=ImgDet&w=696&h=392&rs=1" data-holder-rendered="true">
+                                 <div class="card-body">
+                                    <p style="overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 1; /* number of lines to show */ line-clamp: 1; -webkit-box-orient: vertical;" class="card-text blue">{{ seciuritys.Title }}</p>
+                                   {% if seciuritys.Label == 1 %}
+                                   <span class="badge badge-success">Tin thật</span>
+                                   {% else %}
+                                   <span class="badge badge-danger">Tin giả</span>
+                                   {% endif %} 
+                                   <div class="d-flex justify-content-between align-items-center">
+                                     <div class="btn-group">
+                                       <a  style="text-decoration: none" href="view/{{seciuritys._id}}" class="btn btn-sm btn-secondary">Xem ngay</a>
+                                     </div>
+                                   </div>
+                                   
+                                 </div>
+                               </div>
+                             </div>
+                             {% endfor %}
+                        </div>
+                        <nav aria-label="Page navigation">
+                            <ul class="pagination justify-content-center"></ul>
+                          </nav>
+                        <h4>Khác</h4>
+                        <div class="row">
+                            {% for others in other %}
+                             <div class="col-md-4">
+                               <div class="card mb-4 box-shadow">
+                                <img class="card-img-top" src="https://th.bing.com/th/id/OIP.a-iy8z5ZcZ0D7HzaKSgOmwHaEK?pid=ImgDet&w=696&h=392&rs=1" data-holder-rendered="true">
+                                 <div class="card-body">
+                                    <p style="overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 1; /* number of lines to show */ line-clamp: 1; -webkit-box-orient: vertical;" class="card-text blue">{{ others.Title }}</p>
+                                   {% if others.Label == 1 %}
+                                   <span class="badge badge-success">Tin thật</span>
+                                   {% else %}
+                                   <span class="badge badge-danger">Tin giả</span>
+                                   {% endif %} 
+                                   <div class="d-flex justify-content-between align-items-center">
+                                     <div class="btn-group">
+                                       <a  style="text-decoration: none" href="view/{{others._id}}" class="btn btn-sm btn-secondary">Xem ngay</a>
+                                     </div>
+                                   </div>
+                                 </div>
+                               </div>
+                             </div>
+                             {% endfor %}
+                        </div>
+                        <nav aria-label="Page navigation">
+                            <ul class="pagination justify-content-center"></ul>
+                          </nav>
+                        <!-- end of row -->
+                    </div>
+                    
+                    <!-- end of container -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static',filename='js/main.js') }}"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <script>
+        function myFunction() {
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("myInput");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("myTable");
+            tr = table.getElementsByTagName("tr");
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[0];
+                if (td) {
+                    txtValue = td.textContent || td.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+    </script><script>
+        $(document).ready(function() {
+  var itemsPerPage = 6; // số lượng card trên mỗi trang
+  var numOfItems = $('.row .col-lg-4').length; // số lượng card trong danh sách
+  var numOfPages = Math.ceil(numOfItems / itemsPerPage); // số lượng trang cần hiển thị
+  var maxVisiblePages = 5; // số lượng phân trang tối đa hiển thị
+  
+  var paginationHtml = '';
+  if (numOfPages > maxVisiblePages) {
+    var midPoint = Math.floor(maxVisiblePages / 2);
+    var startPage = 1;
+    var endPage = numOfPages;
+    
+    if (numOfPages > maxVisiblePages) {
+      if (currentPage > midPoint) {
+        startPage = currentPage - midPoint;
+        endPage = currentPage + midPoint;
+      } else {
+        startPage = 1;
+        endPage = maxVisiblePages;
+      }
+      if (endPage > numOfPages) {
+        endPage = numOfPages;
+        startPage = endPage - maxVisiblePages + 1;
+      }
+    }
+    
+    for (var i = startPage; i <= endPage; i++) {
+      paginationHtml += '<li class="page-item"><a class="page-link" href="#">' + i + '</a></li>';
+    }
+    if (startPage > 1) {
+      paginationHtml = '<li class="page-item"><a class="page-link" href="#">1</a></li><li class="disabled"><span>...</span></li>' + paginationHtml;
+    }
+    if (endPage < numOfPages) {
+      paginationHtml += '<li class="disabled"><span>...</span></li><li class="page-item"><a class="page-link" href="#">' + numOfPages + '</a></li>';
+    }
+  } else {
+    for (var i = 1; i <= numOfPages; i++) {
+      paginationHtml += '<li class="page-item"><a class="page-link" href="#">' + i + '</a></li>';
+    }
+  }
+  
+  $('.pagination').html(paginationHtml);
+  
+  $('.pagination li').click(function(event) {
+    event.preventDefault();
+    
+    var pageNum = $(this).text();
+    var startItem = (pageNum - 1) * itemsPerPage;
+    var endItem = startItem + itemsPerPage;
+    
+    $('.row .col-lg-4').hide().slice(startItem, endItem).show();
+    
+    $('.pagination li').removeClass('active');
+    $(this).addClass('active');
+  });
+  
+  $('.pagination li:first-child').addClass('active');
+  
+  $('.row .col-lg-4').hide().slice(0, itemsPerPage).show();
+});
+
+    </script>
+</body>
+
+</html>

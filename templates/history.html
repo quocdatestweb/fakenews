@@ -1,0 +1,396 @@
+{% if id_user != google_id %}
+<meta http-equiv="refresh" content="0;url={{ url_for('index') }}" />
+{%else%}
+<link rel="icon"
+    href="https://media1.giphy.com/media/f9xvcrzFdRaHATv6me/giphy.gif?cid=6c09b95256e366c2930ac6483563c01a1c5f9a6d8e1e27ce&rid=giphy.gif&ct=s"
+    type="image/icon type">
+{% endif %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- SEO Meta Tags -->
+    <meta name="description"
+        content="Tivo is a HTML landing page template built with Bootstrap to help you crate engaging presentations for SaaS apps and convert visitors into users.">
+    <meta name="author" content="Inovatik">
+
+    <!-- Website Title -->
+    <title>Phát hiện tin giả bằng Machine Learning </title>
+    <!-- Styles -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700&display=swap&subset=latin-ext"
+        rel="stylesheet">
+    <link href="{{ url_for('static',filename='css/bootstrap.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static',filename='css/fontawesome-all.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static',filename='css/styles.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static',filename='css/swiper.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static',filename='css/magnific-popup.css') }}" rel="stylesheet">
+    <script src="https://cdn.ckeditor.com/4.21.0/standard/ckeditor.js"></script>
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/jquery-tourer@1.0.1/dist/jquery-tourer.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/jquery-tourer@1.0.1/dist/jquery-tourer.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+        integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="icon"
+        href="https://media1.giphy.com/media/f9xvcrzFdRaHATv6me/giphy.gif?cid=6c09b95256e366c2930ac6483563c01a1c5f9a6d8e1e27ce&rid=giphy.gif&ct=s">
+    <script src="https://unpkg.com/intro.js/minified/intro.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/intro.js/minified/introjs.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastify-js/1.12.0/toastify.js"
+        integrity="sha512-ZHzbWDQKpcZxIT9l5KhcnwQTidZFzwK/c7gpUUsFvGjEsxPusdUCyFxjjpc7e/Wj7vLhfMujNx7COwOmzbn+2w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastify-js/1.12.0/toastify.css"
+        integrity="sha512-kT0v1BxcibEO2Yc+6Z3W1gNsN+2cZ/U6uITqHhIJl8SAvt9vpO8llugdCPXA7cCnp8G1xbuSqHNMRaR3Zlz9yA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+        crossorigin="anonymous"></script>
+
+    <style>
+        a,
+        .taga,
+        ul,
+        li {
+            text-decoration: none;
+        }
+
+        .card-title,
+        .card-link,
+        .fa-solid,
+        .taga {
+            color: #5f4dee
+        }
+    </style>
+
+    <!-- <link href="css/fontawesome-all.css" rel="stylesheet">
+    <link href="css/swiper.css" rel="stylesheet">
+	<link href="css/magnific-popup.css" rel="stylesheet">
+	<link href="css/styles.css" rel="stylesheet"> -->
+
+    <!-- Favicon  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+        integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+
+<body data-spy="scroll" data-target=".fixed-top">
+
+    <!-- Preloader -->
+    <div class="spinner-wrapper">
+        <div class="spinner">
+            <div class="bounce1"></div>
+            <div class="bounce2"></div>
+            <div class="bounce3"></div>
+        </div>
+    </div>
+    <!-- end of preloader -->
+
+    <!-- Navigation -->
+    <nav style="background-color:#5f4dee" class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
+        <div class="container">
+
+            <!-- Text Logo - Use this if you don't have a graphic logo -->
+            <!-- <a class="navbar-brand logo-text page-scroll" href="index.html">Tivo</a> -->
+
+            <!-- Image Logo -->
+            <div class="navbar-brand" href="index.html">
+                {% if not pictures %}
+                <h6 class="text-white"></h6><img width="90" style="height: auto; border-radius: 50%;"
+                    src="https://media1.giphy.com/media/f9xvcrzFdRaHATv6me/giphy.gif?cid=6c09b95256e366c2930ac6483563c01a1c5f9a6d8e1e27ce&rid=giphy.gif&ct=s"
+                    alt="alternative"></h6>{% else %}
+                <h6 class="text-white"><img style="border-radius: 50%;" width="45" class="img-rounded"
+                        src="{{ pictures }}" alt="User Logo"> Xin chào {{names}}</h6>
+                {% endif %}
+            </div>
+
+            <!-- Mobile Menu Toggle Button -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+                aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-awesome fas fa-bars"></span>
+                <span class="navbar-toggler-awesome fas fa-times"></span>
+            </button>
+            <!-- end of mobile menu toggle button -->
+
+            <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link page-scroll active" href="{{ url_for('home')}}">TRANG CHỦ <span
+                                class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link page-scroll active" href="{{ url_for('forum')}}">DIỄN ĐÀN</a>
+                    </li>
+                    <!-- <li class="nav-item">
+                    <a class="nav-link page-scroll" href="#details">TIN GIẢ</a>
+                </li> -->
+
+                    <!-- Dropdown Menu -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle page-scroll active" href="" id="navbarDropdown"
+                            role="button" aria-haspopup="true" aria-expanded="false">HƯỚNG DẪN</a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{{ url_for('detectfakenews')}}"><span class="item-text">HƯỚNG
+                                    DẪN CÁCH NHẬN BIẾT TIN GIẢ </span></a>
+                            <div class="dropdown-items-divide-hr"></div>
+                            <a class="dropdown-item" href="{{ url_for('preventfakenews')}}"><span
+                                    class="item-text">HƯỚNG DẪN CÁCH
+                                    PHÒNG TRÁNH, ĐỐI PHÓ TIN GIẢ </span></a>
+                            <div class="dropdown-items-divide-hr"></div>
+                            <a class="dropdown-item" href="{{ url_for('usermanual')}}"><span class="item-text">HƯỚNG DẪN
+                                    SỬ DỤNG TRANG WEB </span></a>
+                        </div>
+                    </li>
+                    <!-- end of dropdown menu -->
+
+                    <li class="nav-item">
+                        <a class="nav-link page-scroll active" href="{{ url_for('check')}}">KIỂM TRA</a>
+                    </li>
+
+                    {% if not names %}
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link page-scroll active" href="{{ url_for('post')}}">ĐĂNG BÀI</a>
+                    </li>
+                    {% endif %}
+
+                </ul>
+                <span class="nav-item">
+                    {% if not names %}
+                    <a class="btn-outline-sm" href="{{ url_for('login')}}"><i class="fa-brands fa-google"></i> ĐĂNG
+                        NHẬP</a>
+                    {% else %}
+                    <a class="btn-outline-sm active" href="{{ url_for('logout')}}"><i
+                            class="fa-solid fa-right-from-bracket text-white"></i> ĐĂNG
+                        XUẤT</a>
+                    {% endif %}
+                </span>
+            </div>
+        </div>
+        <!-- end of container -->
+    </nav>
+    <!-- end of navbar -->
+    <!-- end of navigation -->
+
+    <!-- Header -->
+    <!-- end of ex-header -->
+    <!-- end of header -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+    <!-- <nav class="navbar navbar-light bg-white">
+            <a href="#" class="navbar-brand">Bootsbook</a>
+            <form class="form-inline">
+                <div class="input-group">
+                    <input type="text" class="form-control" aria-label="Recipient's username" aria-describedby="button-addon2">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-primary" type="button" id="button-addon2">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </nav> -->
+
+
+    <div class="ex-basic-2 mt-3">
+        <div class="container">
+            <h4>Lịch sử bài đăng</h4>
+            <div class="row">
+                {% for forum in forums_list %}
+                <div class="col-md-4">
+                    <div class="card mb-4 box-shadow" style="height: 95%;">
+                          <img class="card-img-top" src="{{forum.ImageUpload}}" style="max-width:  auto;max-height: 200px;"
+                            data-holder-rendered="true">
+                        <div class="card-body">
+                            <a class="card-text blue" style="padding-top:5px" href="/view/{{forum._id}}"
+                                class="btn btn-sm btn-secondary">{{forum.Title }}</a>
+                            <h6 class="card-subtitle mt-2 mb-2 text-muted">{{forum.DatePost}}</h6>
+                            {% if forum.Label == 1 %}
+                            <span class="badge badge-success">Tin thật</span>
+                            {% else %}
+                            <span class="badge badge-danger">Tin giả</span>
+                            {% endif %}
+
+                            {% if forum.Status == 1 %}
+                            <span class="badge badge-success">Đã phê duyệt</span>
+                            {% elif forum.Status == 0 %}
+                            <span class="badge badge-danger">Chưa phê duyệt</span>
+                            {% elif forum.Status == 2 %}
+                            <span class="badge badge-secondary">Từ chối phê duyệt</span>
+                            {% endif %}
+                            <a target="_self" class="btn float-right"  data-toggle="modal" data-target="#exampleModal"
+                                data-idforums="{{forum._id}}" data-iduser="{{id_user}}" ><i
+                                    class="fa fa-trash" style="color:#5f4dee"></i></a>
+                            <!-- <a data-idforums="{{forum._id}}" class="float-right pt-2 btndelete" target="_self" data-toggle="modal" data-target="#exampleModal" data-bs-toggle="modal"
+                                data-bs-target="#exampleModal"><i class="fa-solid fa-trash"></i></a> -->
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <nav d aria-label="Page navigation example">
+            <ul class="pagination justify-content-center mt-5">
+                <li class="page-item">
+                    <a style="color:#5f4dee;" class="page-link" href="/history/{{id_user}}/{{ page - 1}}"
+                        aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                </li>
+                <li class="page-item"><a style="color:#5f4dee; background-color: #5f4dee; color:white" class="page-link"
+                        href="/history/{{id_user}}/{{ page}}">{{ page}}</a></li>
+                <li class="page-item"><a style="color:#5f4dee;" class="page-link"
+                        href="/history/{{id_user}}/{{ page+1}}">{{ page + 1}}</a></li>
+                <li class="page-item"><a style="color:#5f4dee;" class="page-link"
+                        href="/history/{{id_user}}/{{ page +2}}">{{ page+2}}</a></li>
+                <li class="page-item">
+                    <a style="color:#5f4dee;" class="page-link" href="/history/{{id_user}}/{{ page + 1}}"
+                        aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+    </div>
+    <!-- end of ex-basic-2 -->
+    <!-- end of privacy content -->
+    <!-- Copyright -->
+    <!-- Button trigger modal -->
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Xác nhận xóa</h5>
+                    <button type="button" id="closed" class="btn-close" data-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <img class="card-img-top" src="https://res.cloudinary.com/dz9j1pqvk/image/upload/v1681580160/delete_zf6pp6.png" style="height: 150px; width:auto;display: block; margin-left: auto; margin-right: auto;" data-holder-rendered="true">
+                            <br>
+                            <p class="text-center">Bạn có chắc chắn muốn xóa bài viết này hay không? <span id="itemId" style="display: none;"></span> <span
+                                style="display: none;" id="userId"></span></p>
+                        </div>
+                   
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="closed" class="btn btn-secondary" data-dismiss="modal">Hủy </button>
+                    <button type="button" class="btn btn-danger" id="deleteBtn">Xóa</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="copyright mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <p class="p-small">Copyright &copy; 2023. All Rights Reserved.</a>
+                    </p>
+                </div>
+                <!-- end of col -->
+            </div>
+            <!-- enf of row -->
+        </div>
+        <!-- end of container -->
+    </div>
+    <!-- end of copyright -->
+    <!-- end of copyright -->
+
+
+    <!-- Scripts -->
+    <script src="{{ url_for('static',filename='js/jquery.min.js') }}">
+    </script>
+    <script src="{{ url_for('static',filename='js/popper.min.js') }}">
+    </script>
+    <script src="{{ url_for('static',filename='js/bootstrap.min.js') }}">
+    </script>
+    <script src="{{ url_for('static',filename='js/jquery.easing.min.js') }}">
+    </script>
+    <script src="{{ url_for('static',filename='js/swiper.min.js.js') }}">
+    </script>
+    <script src="{{ url_for('static',filename='js/jquery.magnific-popup.js') }}">
+    </script>
+    <script src="{{ url_for('static',filename='js/validator.min.js') }}">
+    </script>
+    <script src="{{ url_for('static',filename='js/scripts.js') }}">
+    </script>
+    <script>
+
+        $('#exampleModal').on('show.bs.modal', function (event) {
+
+            var button = $(event.relatedTarget) // Button that triggered the modal
+
+            var idforums = button.data('idforums') // Extract info from data-* attributes
+            var iduser = button.data('iduser') // Extract info from data-* attributes
+            $('#itemId').text(idforums);
+            $('#userId').text(iduser);
+            console.log(idforums);
+            console.log(iduser);
+
+        })
+
+        // Gắn sự kiện cho nút xóa
+        $('#deleteBtn').click(function () {
+            var itemId = $('#itemId').text();
+            var userId = $('#userId').text();
+            var data = {
+                itemId: itemId, // Giá trị ID của đối tượng cần xóa
+                userId: userId, // Ví dụ dữ liệu cần gửi lên server
+                page: 0 // Ví dụ dữ liệu cần gửi lên server
+            };
+            // Lấy giá trị ID của đối tượng cần xóa từ HTML, ví dụ: $('#itemId').text();
+            // Gửi yêu cầu xóa dữ liệu lên server với ID của đối tượng cần xóa
+            $.ajax({
+                url: '/deleteforum', // Đường dẫn đến endpoint xử lý yêu cầu xóa dữ liệu trên server
+                type: 'POST', // Phương thức POST
+                data: data, // Dữ liệu cần gửi lên server
+                success: function (response) {
+                    // Xử lý kết quả trả về từ server khi yêu cầu thành công
+                    console.log(response);
+                    // Thực hiện các hành động sau khi xóa dữ liệu thành công
+                },
+                error: function (xhr, status, error) {
+                    // Xử lý lỗi khi yêu cầu không thành công
+                    console.log(xhr.responseText);
+                }
+            });
+            window.location.replace(window.location.pathname + window.location.search + window.location.hash);
+            // does not create a history entry
+            window.location.href = window.location.pathname + window.location.search + window.location.hash;
+        });
+
+        // Gắn sự kiện cho nút xóa
+        $('#closed').click(function () {
+           $('#myModal').modal('hide');
+        });
+    </script>
+
+</body>
+
+</html>

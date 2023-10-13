@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Tivo is a HTML landing page template built with Bootstrap to help you crate engaging presentations for SaaS apps and convert visitors into users.">
+    <meta name="author" content="Inovatik">
+
+    <!-- Website Title -->
+    <title>Phát hiện tin giả bằng Machine Learning </title>
+    <!-- Styles -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700&display=swap&subset=latin-ext" rel="stylesheet">
+    <link href="{{ url_for('static',filename='css/bootstrap.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static',filename='css/fontawesome-all.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static',filename='css/styles.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static',filename='css/swiper.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static',filename='css/magnific-popup.css') }}" rel="stylesheet">
+
+    <!-- <link href="css/fontawesome-all.css" rel="stylesheet">
+    <link href="css/swiper.css" rel="stylesheet">
+	<link href="css/magnific-popup.css" rel="stylesheet">
+	<link href="css/styles.css" rel="stylesheet"> -->
+
+    <!-- Favicon  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer"
+    />
+    <link rel="icon" href="https://media1.giphy.com/media/f9xvcrzFdRaHATv6me/giphy.gif?cid=6c09b95256e366c2930ac6483563c01a1c5f9a6d8e1e27ce&rid=giphy.gif&ct=s">
+</head>
+
+<body data-spy="scroll" data-target=".fixed-top">
+
+    <!-- Preloader -->
+    <div class="spinner-wrapper">
+        <div class="spinner">
+            <div class="bounce1"></div>
+            <div class="bounce2"></div>
+            <div class="bounce3"></div>
+        </div>
+    </div>
+    <!-- end of preloader -->
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
+        <div class="container">
+
+            <!-- Text Logo - Use this if you don't have a graphic logo -->
+            <!-- <a class="navbar-brand logo-text page-scroll" href="index.html">Tivo</a> -->
+
+            <!-- Image Logo -->
+            <div class="navbar-brand" href="index.html">
+                {% if not pictures %}
+                <h6 class="text-white"></h6><img width="90" style="height: auto; border-radius: 50%;" src="https://media1.giphy.com/media/f9xvcrzFdRaHATv6me/giphy.gif?cid=6c09b95256e366c2930ac6483563c01a1c5f9a6d8e1e27ce&rid=giphy.gif&ct=s" alt="alternative"></h6>{% else %}
+                <h6 class="text-white"><img style="border-radius: 50%;" width="45" class="img-rounded" src="{{ pictures }}" alt="User Logo"> Xin chào {{names}}</h6>
+                {% endif %}
+            </div>
+
+            <!-- Mobile Menu Toggle Button -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-awesome fas fa-bars"></span>
+                <span class="navbar-toggler-awesome fas fa-times"></span>
+            </button>
+            <!-- end of mobile menu toggle button -->
+
+            <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link page-scroll" href="{{ url_for('home')}}">TRANG CHỦ <span
+                                class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link page-scroll" href="{{ url_for('forum')}}">DIỄN ĐÀN</a>
+                    </li>
+                    <!-- <li class="nav-item">
+                    <a class="nav-link page-scroll" href="#details">TIN GIẢ</a>
+                </li> -->
+
+                    <!-- Dropdown Menu -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle page-scroll active" href="" id="navbarDropdown" role="button" aria-haspopup="true" aria-expanded="false">HƯỚNG DẪN</a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{{ url_for('detectfakenews')}}"><span class="item-text">HƯỚNG
+                                    DẪN CÁCH NHẬN BIẾT TIN GIẢ </span></a>
+                            <div class="dropdown-items-divide-hr"></div>
+                            <a class="dropdown-item" href="{{ url_for('preventfakenews')}}"><span
+                                    class="item-text">HƯỚNG DẪN CÁCH PHÒNG TRÁNH, ĐỐI PHÓ TIN GIẢ </span></a>
+                            <div class="dropdown-items-divide-hr"></div>
+                            <a class="dropdown-item" href="{{ url_for('usermanual')}}"><span class="item-text">HƯỚNG DẪN
+                                    SỬ DỤNG TRANG WEB </span></a>
+                        </div>
+                    </li>
+                    <!-- end of dropdown menu -->
+
+                    <li class="nav-item">
+                        <a class="nav-link page-scroll" href="{{ url_for('check')}}">KIỂM TRA</a>
+                    </li>
+                     
+                    {% if not names %}
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link page-scroll" href="{{ url_for('post')}}">ĐĂNG BÀI</a>
+                    </li>
+                    {% endif %}
+                 
+                </ul>
+                <span class="nav-item">
+                    {% if not names %}
+                    <a class="btn-outline-sm" href="{{ url_for('login')}}"><i class="fa-brands fa-google"></i> ĐĂNG
+                        NHẬP</a>
+                    {% else %}
+                    <a class="btn-outline-sm" href="{{ url_for('logout')}}"><i
+                            class="fa-solid fa-right-from-bracket"></i> ĐĂNG XUẤT</a>
+                    {% endif %}
+                </span>
+            </div>
+        </div>
+        <!-- end of container -->
+    </nav>
+    <!-- end of navbar -->
+    <!-- end of navigation -->
+
+    <!-- Header -->
+    <header id="header" class="ex-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>Hướng Dẫn Cách Phòng Tránh, Đối Phó Với Tin Giả </h1>
+                </div>
+                <!-- end of col -->
+            </div>
+            <!-- end of row -->
+        </div>
+        <!-- end of container -->
+    </header>
+    <!-- end of ex-header -->
+    <!-- end of header -->
+
+    <!-- Privacy Content -->
+    <div class="ex-basic-2">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <!-- <div class="image-container-large">
+                        <img class="img-fluid" width="45" style="height: auto; border-radius: 50%;"  src="https://media1.giphy.com/media/f9xvcrzFdRaHATv6me/giphy.gif?cid=6c09b95256e366c2930ac6483563c01a1c5f9a6d8e1e27ce&rid=giphy.gif&ct=s" alt="alternative">
+                    </div> -->
+                    <!-- end of image-container-large -->
+                    <div class="text-container">
+                        <div class="row">
+                            <div class="col-md-5">
+                                <h3>Hướng Dẫn Cách Phòng Tránh, Đối Phó Với Tin Giả </h3>
+                                <p>
+                                    </br>&nbsp;&nbsp;&nbsp;&nbsp;Có rất nhiều cách để chúng ta phát hiện tin giả và điều này phụ thuộc vào nhiều yếu tố như kiến thức, kinh nghiệm, kỹ năng phân tích, năng lực phán đoán, tư duy phê phán,...
+                                    </br>&nbsp;&nbsp;&nbsp;&nbsp; Theo đó, khi tiếp nhận thông tin, người dùng mạng xã hội cần kiểm chứng nguồn tin, xem thông tin đó đến từ nguồn nào, nếu đến từ một người lạ, thông tin không rõ ràng cần cảnh giác
+                                </p>
+                            </div>
+                            <!-- end of col -->
+                            <div class="col-md-7">
+                                <div class="image-container-small text-center">
+                                    <img width="80%" class="img-fluid" src="https://tingia.gov.vn/wp-content/uploads/2021/01/huongdannhanbiet-2-2.jpg" alt="alternative">
+                                </div>
+                                <!-- end of image-container-small -->
+                            </div>
+                            <!-- end of col -->
+                        </div>
+                        <!-- end of row -->
+                    </div>
+                    <!-- end of text-container -->
+
+                    <!-- <div class="text-container dark">
+                        <p class="testimonial-text">Tivo is a HTML landing page template tool. By its nature, Services enable our customers to promote their products and services integrate with hundreds of business applications that they already use, all in one place. Services help our customers promote their products and services, marketing and advertising; engaging audiences; scheduling and publishing messages; and analyze the results.</p>
+                    </div> end of text container -->
+                </div>
+                <!-- end of col-->
+            </div>
+            <!-- end of row -->
+        </div>
+        <!-- end of container -->
+    </div>
+    <!-- end of ex-basic-2 -->
+    <!-- end of privacy content -->
+    <!-- Copyright -->
+    <div class="copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <p class="p-small">Copyright &copy; 2023. All Rights Reserved.</a>
+                    </p>
+                </div>
+                <!-- end of col -->
+            </div>
+            <!-- enf of row -->
+        </div>
+        <!-- end of container -->
+    </div>
+    <!-- end of copyright -->
+    <!-- end of copyright -->
+
+
+    <!-- Scripts -->
+    <script src="{{ url_for('static',filename='js/jquery.min.js') }}">
+    </script>
+    <script src="{{ url_for('static',filename='js/popper.min.js') }}">
+    </script>
+    <script src="{{ url_for('static',filename='js/bootstrap.min.js') }}">
+    </script>
+    <script src="{{ url_for('static',filename='js/jquery.easing.min.js') }}">
+    </script>
+    <script src="{{ url_for('static',filename='js/swiper.min.js.js') }}">
+    </script>
+    <script src="{{ url_for('static',filename='js/jquery.magnific-popup.js') }}">
+    </script>
+    <script src="{{ url_for('static',filename='js/validator.min.js') }}">
+    </script>
+    <script src="{{ url_for('static',filename='js/scripts.js') }}">
+    </script>
+</body>
+
+</html>

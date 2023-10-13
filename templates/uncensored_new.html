@@ -1,0 +1,1247 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="viewport" content="width=device-width initial-scale=1.0">
+
+    <title>Phát hiện tin giả bằng Machine Learning</title>
+
+    <!-- GLOBAL MAINLY STYLES-->
+
+    <!-- <base href="https://it-zone.club/"> -->
+    <base href="http://127.0.0.1:5000/">
+
+    <script src="https://cdn.ckeditor.com/4.19.1/standard-all/ckeditor.js"></script>
+    <link href="https://it-zone.club/public/assets/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- <link href="public/assets/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet" /> -->
+
+    <link href="https://it-zone.club/public/assets/vendors/themify-icons/css/themify-icons.css" rel="stylesheet" />
+
+    <!-- PLUGINS STYLES-->
+
+    <link href="https://it-zone.club/public/assets/vendors/jvectormap/jquery-jvectormap-2.0.3.css" rel="stylesheet" />
+
+    <!-- THEME STYLES-->
+    <link rel="icon"
+        href="https://media1.giphy.com/media/f9xvcrzFdRaHATv6me/giphy.gif?cid=6c09b95256e366c2930ac6483563c01a1c5f9a6d8e1e27ce&rid=giphy.gif&ct=s"
+        type="image/x-icon">
+
+    <link rel='shortcut icon' href='https://it-zone.club/public/assets/img/logo.jpg'>
+
+    <link rel="stylesheet" href="https://unpkg.com/webtour@1.1.0/dist/webtour.min.css">
+    <script src="https://unpkg.com/webtour@1.1.0/dist/webtour.min.js"></script>
+    <link href="https://it-zone.club/public/assets/css/main.min.css" rel="stylesheet" />
+
+    <link href="https://it-zone.club/public/assets/vendors/DataTables/datatables.min.css" rel="stylesheet" />
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+    <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+
+    <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/gh/linways/table-to-excel@v1.0.4/dist/tableToExcel.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ckeditor/4.16.2/ckeditor.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@themify/icons@5.0.1/css/themify-icons.css">
+
+    <style>
+        .input-group-append {
+
+            display: none;
+
+        }
+    </style>
+    <style>
+        .pyro>.before,
+        .pyro>.after {
+            position: absolute;
+            width: 7px;
+            height: 7px;
+            pointer-events: none;
+            z-index: 99999999;
+            border-radius: 50%;
+            box-shadow: -120px -218.66667px blue, 248px -16.66667px #00ff84, 190px 16.33333px #002bff, -113px -308.66667px #ff009d, -109px -287.66667px #ffb300, -50px -313.66667px #ff006e, 226px -31.66667px #ff4000, 180px -351.66667px #ff00d0, -12px -338.66667px #00f6ff, 220px -388.66667px #99ff00, -69px -27.66667px #ff0400, -111px -339.66667px #6200ff, 155px -237.66667px #00ddff, -152px -380.66667px #00ffd0, -50px -37.66667px #00ffdd, -95px -175.66667px #a6ff00, -88px 10.33333px #0d00ff, 112px -309.66667px #005eff, 69px -415.66667px #ff00a6, 168px -100.66667px #ff004c, -244px 24.33333px #ff6600, 97px -325.66667px #ff0066, -211px -182.66667px #00ffa2, 236px -126.66667px #b700ff, 140px -196.66667px #9000ff, 125px -175.66667px #00bbff, 118px -381.66667px #ff002f, 144px -111.66667px #ffae00, 36px -78.66667px #f600ff, -63px -196.66667px #c800ff, -218px -227.66667px #d4ff00, -134px -377.66667px #ea00ff, -36px -412.66667px #ff00d4, 209px -106.66667px #00fff2, 91px -278.66667px #000dff, -22px -191.66667px #9dff00, 139px -392.66667px #a6ff00, 56px -2.66667px #0099ff, -156px -276.66667px #ea00ff, -163px -233.66667px #00fffb, -238px -346.66667px #00ff73, 62px -363.66667px #0088ff, 244px -170.66667px #0062ff, 224px -142.66667px #b300ff, 141px -208.66667px #9000ff, 211px -285.66667px #ff6600, 181px -128.66667px #1e00ff, 90px -123.66667px #c800ff, 189px 70.33333px #00ffc8, -18px -383.66667px #00ff33, 100px -6.66667px #ff008c;
+            -moz-animation: 1s bang ease-out infinite backwards, 1s gravity ease-in infinite backwards, 5s position linear infinite backwards;
+            -webkit-animation: 1s bang ease-out infinite backwards, 1s gravity ease-in infinite backwards, 5s position linear infinite backwards;
+            -o-animation: 1s bang ease-out infinite backwards, 1s gravity ease-in infinite backwards, 5s position linear infinite backwards;
+            -ms-animation: 1s bang ease-out infinite backwards, 1s gravity ease-in infinite backwards, 5s position linear infinite backwards;
+            animation: 1s bang ease-out infinite backwards, 1s gravity ease-in infinite backwards, 5s position linear infinite backwards;
+        }
+
+        .pyro>.after {
+            -moz-animation-delay: 1.25s, 1.25s, 1.25s;
+            -webkit-animation-delay: 1.25s, 1.25s, 1.25s;
+            -o-animation-delay: 1.25s, 1.25s, 1.25s;
+            -ms-animation-delay: 1.25s, 1.25s, 1.25s;
+            animation-delay: 1.25s, 1.25s, 1.25s;
+            -moz-animation-duration: 1.25s, 1.25s, 6.25s;
+            -webkit-animation-duration: 1.25s, 1.25s, 6.25s;
+            -o-animation-duration: 1.25s, 1.25s, 6.25s;
+            -ms-animation-duration: 1.25s, 1.25s, 6.25s;
+            animation-duration: 1.25s, 1.25s, 6.25s;
+        }
+
+        @-webkit-keyframes bang {
+            from {
+                box-shadow: 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white;
+            }
+        }
+
+        @-moz-keyframes bang {
+            from {
+                box-shadow: 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white;
+            }
+        }
+
+        @-o-keyframes bang {
+            from {
+                box-shadow: 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white;
+            }
+        }
+
+        @-ms-keyframes bang {
+            from {
+                box-shadow: 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white;
+            }
+        }
+
+        @keyframes bang {
+            from {
+                box-shadow: 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white, 0 0 white;
+            }
+        }
+
+        @-webkit-keyframes gravity {
+            to {
+                transform: translateY(200px);
+                -moz-transform: translateY(200px);
+                -webkit-transform: translateY(200px);
+                -o-transform: translateY(200px);
+                -ms-transform: translateY(200px);
+                opacity: 0;
+            }
+        }
+
+        @-moz-keyframes gravity {
+            to {
+                transform: translateY(200px);
+                -moz-transform: translateY(200px);
+                -webkit-transform: translateY(200px);
+                -o-transform: translateY(200px);
+                -ms-transform: translateY(200px);
+                opacity: 0;
+            }
+        }
+
+        @-o-keyframes gravity {
+            to {
+                transform: translateY(200px);
+                -moz-transform: translateY(200px);
+                -webkit-transform: translateY(200px);
+                -o-transform: translateY(200px);
+                -ms-transform: translateY(200px);
+                opacity: 0;
+            }
+        }
+
+        @-ms-keyframes gravity {
+            to {
+                transform: translateY(200px);
+                -moz-transform: translateY(200px);
+                -webkit-transform: translateY(200px);
+                -o-transform: translateY(200px);
+                -ms-transform: translateY(200px);
+                opacity: 0;
+            }
+        }
+
+        @keyframes gravity {
+            to {
+                transform: translateY(200px);
+                -moz-transform: translateY(200px);
+                -webkit-transform: translateY(200px);
+                -o-transform: translateY(200px);
+                -ms-transform: translateY(200px);
+                opacity: 0;
+            }
+        }
+
+        @-webkit-keyframes position {
+
+            0%,
+            19.9% {
+                margin-top: 10%;
+                margin-left: 40%;
+            }
+
+            20%,
+            39.9% {
+                margin-top: 40%;
+                margin-left: 30%;
+            }
+
+            40%,
+            59.9% {
+                margin-top: 20%;
+                margin-left: 70%;
+            }
+
+            60%,
+            79.9% {
+                margin-top: 30%;
+                margin-left: 20%;
+            }
+
+            80%,
+            99.9% {
+                margin-top: 30%;
+                margin-left: 80%;
+            }
+        }
+
+        @-moz-keyframes position {
+
+            0%,
+            19.9% {
+                margin-top: 10%;
+                margin-left: 40%;
+            }
+
+            20%,
+            39.9% {
+                margin-top: 40%;
+                margin-left: 30%;
+            }
+
+            40%,
+            59.9% {
+                margin-top: 20%;
+                margin-left: 70%;
+            }
+
+            60%,
+            79.9% {
+                margin-top: 30%;
+                margin-left: 20%;
+            }
+
+            80%,
+            99.9% {
+                margin-top: 30%;
+                margin-left: 80%;
+            }
+        }
+
+        @-o-keyframes position {
+
+            0%,
+            19.9% {
+                margin-top: 10%;
+                margin-left: 40%;
+            }
+
+            20%,
+            39.9% {
+                margin-top: 40%;
+                margin-left: 30%;
+            }
+
+            40%,
+            59.9% {
+                margin-top: 20%;
+                margin-left: 70%;
+            }
+
+            60%,
+            79.9% {
+                margin-top: 30%;
+                margin-left: 20%;
+            }
+
+            80%,
+            99.9% {
+                margin-top: 30%;
+                margin-left: 80%;
+            }
+        }
+
+        @-ms-keyframes position {
+
+            0%,
+            19.9% {
+                margin-top: 10%;
+                margin-left: 40%;
+            }
+
+            20%,
+            39.9% {
+                margin-top: 40%;
+                margin-left: 30%;
+            }
+
+            40%,
+            59.9% {
+                margin-top: 20%;
+                margin-left: 70%;
+            }
+
+            60%,
+            79.9% {
+                margin-top: 30%;
+                margin-left: 20%;
+            }
+
+            80%,
+            99.9% {
+                margin-top: 30%;
+                margin-left: 80%;
+            }
+        }
+
+        @keyframes position {
+
+            0%,
+            19.9% {
+                margin-top: 10%;
+                margin-left: 40%;
+            }
+
+            20%,
+            39.9% {
+                margin-top: 40%;
+                margin-left: 30%;
+            }
+
+            40%,
+            59.9% {
+                margin-top: 20%;
+                margin-left: 70%;
+            }
+
+            60%,
+            79.9% {
+                margin-top: 30%;
+                margin-left: 20%;
+            }
+
+            80%,
+            99.9% {
+                margin-top: 30%;
+                margin-left: 80%;
+            }
+        }
+
+
+        .clock {
+
+            position: absolute;
+
+            margin: auto;
+
+            height: 400px;
+
+            width: 400px;
+
+            background-color: #fff;
+
+            border-radius: 50%;
+
+            border: 24px solid #DF554C;
+
+            background-image:
+
+                radial-gradient(circle at center, #507D9C 8px, transparent 8px),
+
+                radial-gradient(circle at center, white 50%, transparent 50%, transparent 65%, white 65%),
+
+                linear-gradient(to right, transparent 50%, #507D9C 50%, transparent 51%),
+
+                linear-gradient(to bottom, transparent 50%, #507D9C 50%, transparent 51%),
+
+                linear-gradient(-30deg, transparent 50%, #507D9C 50%, transparent 51%),
+
+                linear-gradient(30deg, transparent 50%, #507D9C 50%, transparent 51%),
+
+                linear-gradient(60deg, transparent 50%, #507D9C 50%, transparent 51%),
+
+                linear-gradient(-60deg, transparent 50%, #507D9C 50%, transparent 51%);
+
+        }
+
+
+
+        .hour-hand {
+
+            position: absolute;
+
+            height: 80px;
+
+            width: 8px;
+
+            margin: auto;
+
+            top: -20%;
+
+            left: 0;
+
+            bottom: 0;
+
+            right: 0;
+
+            border-radius: 4px;
+
+            background-color: #507D9C;
+
+            transform-origin: bottom;
+
+            transform: rotate(0deg);
+
+        }
+
+
+
+        .minute-hand {
+
+            position: absolute;
+
+            height: 120px;
+
+            width: 8px;
+
+            margin: auto;
+
+            top: -30%;
+
+            left: 0;
+
+            bottom: 0;
+
+            right: 0;
+
+            border-radius: 4px;
+
+            background-color: #507D9C;
+
+            transform-origin: bottom;
+
+            transform: rotate(90deg);
+
+        }
+
+
+
+        .second-hand {
+
+            position: absolute;
+
+            height: 120px;
+
+            width: 2px;
+
+            margin: auto;
+
+            top: -30%;
+
+            left: 0;
+
+            bottom: 0;
+
+            right: 0;
+
+            border-radius: 4px;
+
+            background-color: #507D9C;
+
+            transform-origin: bottom;
+
+            transform: rotate(180deg);
+
+        }
+    </style>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+
+<body class="fixed-navbar">
+
+
+    <div class="page-wrapper">
+
+        <!-- START HEADER-->
+
+        <header class="header">
+
+            <div class="page-brand" style="background-color: #0b3c81;">
+
+                <a class="link" href="{{ url_for('dashboard')}}">
+
+                    <span class="brand" style="font-size:large;">PHÁT HIỆN TIN GIẢ
+
+                        <!-- <span class="brand-tip">ITZONE</span> -->
+
+                    </span>
+
+                    <span class="brand-mini"> <img src="https://it-zone.club/public/assets/img/logo.jpg"
+                            width="50px;"></span>
+
+                </a>
+
+            </div>
+
+            <div style="background-color: #0b3c81;" class="flexbox flex-1">
+
+                <!-- START TOP-LEFT TOOLBAR-->
+
+                <ul class="nav navbar-toolbar">
+
+                    <li>
+
+                        <a class="nav-link sidebar-toggler js-sidebar-toggler"><i
+                                class="fa-solid fa-bars text-white"></i></a>
+
+                    </li>
+
+                    <!-- <li>
+
+                 <form class="navbar-search" action="javascript:;">
+
+                     <div class="rel">
+
+                         <span class="search-icon"><i class="ti-search"></i></span>
+
+                         <input class="form-control" placeholder="Search here...">
+
+                     </div>
+
+                 </form>
+
+             </li> -->
+
+                </ul>
+
+                <!-- END TOP-LEFT TOOLBAR-->
+
+                <!-- START TOP-RIGHT TOOLBAR-->
+
+                <ul class="nav navbar-toolbar">
+
+                    <li class="dropdown dropdown-inbox">
+
+                        <!-- <a class="nav-link dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell rel text-white">
+                                <span class="notify-signal" style="background: #e74c3c;"></i></span> -->
+                            <!-- <span class="badge badge-danger envelope-badge"></span> -->
+<!-- 
+                        </a> -->
+
+                        <!-- <ul class="dropdown-menu dropdown-menu-right dropdown-menu-media">
+
+                            <li class="dropdown-menu-header">
+
+                                <div>
+
+                                    <span><strong>Có 3 thông báo mới!</strong></span> -->
+
+                                    <!-- <a class="pull-right" href="mailbox.html">view all</a> -->
+
+                                <!-- </div>
+
+                            </li>
+
+                            <li class="list-group list-group-divider scroller" data-height="200px" data-color="#71808f">
+
+                                <div>
+
+
+                                    <a class="list-group-item">
+
+                                        <div class="media">
+
+                                            <div class="media-img">
+
+                                                <span class="badge badge-info badge-big"><i
+                                                        class="fa fa-solid fa-laptop-medical"></i></span>
+                                            </div>
+
+                                            <div class="media-body">
+
+                                                <div class="font-strong"> </div>Huỳnh Trung Toàn<small
+                                                    class="text-muted float-right"><span
+                                                        class="badge badge-success m-l-5"><i class="ti-alarm-clock"></i>
+                                                        Ca 2</span></small>
+                                                <small class="text-muted">09:13:17</small>
+                                                <small class="text-muted">29/03/2023</small>
+
+
+                                            </div>
+
+                                        </div>
+
+                                    </a>
+
+                                    <a class="list-group-item">
+
+                                        <div class="media">
+
+                                            <div class="media-img">
+
+                                                <span class="badge badge-success badge-big"><i
+                                                        class="fa fa-solid fa-laptop-medical"></i></span>
+                                            </div>
+
+                                            <div class="media-body">
+
+                                                <div class="font-strong"> </div>Võ Nguyễn Kim Tuyền<small
+                                                    class="text-muted float-right"><span
+                                                        class="badge badge-success m-l-5"><i class="ti-alarm-clock"></i>
+                                                        Ca 2</span></small>
+                                                <small class="text-muted">10:44:17</small>
+                                                <small class="text-muted">29/03/2023</small>
+
+
+                                            </div>
+
+                                        </div>
+
+                                    </a>
+
+                                    <a class="list-group-item">
+
+                                        <div class="media">
+
+                                            <div class="media-img">
+
+                                                <span class="badge badge-default badge-big"><i
+                                                        class="fa fa-solid fa-laptop-medical"></i></span>
+                                            </div>
+
+                                            <div class="media-body">
+
+                                                <div class="font-strong"> </div>Lê Hồ Khánh Đại <small
+                                                    class="text-muted float-right"><span
+                                                        class="badge badge-secondary m-l-5"><i
+                                                            class="ti-alarm-clock"></i> Ca 4</span></small>
+                                                <small class="text-muted">15:29:30</small>
+                                                <small class="text-muted">29/03/2023</small>
+
+
+                                            </div>
+
+                                        </div>
+
+                                    </a>
+
+                                </div>
+
+                            </li> -->
+<!-- 
+                        </ul> -->
+
+                    </li>
+
+                    <li class="dropdown dropdown-user ">
+
+                        <a class="nav-link dropdown-toggle link text-white" data-toggle="dropdown">
+
+                            <img class="img-circle" src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
+                                width="45px" />
+
+                            <span>Administrator
+                                <!-- <i class="fa fa-angle-down m-l-5"></i> -->
+                            </a>
+<!-- 
+                        <ul style="padding-top: 10px; box-sizing: content-box; margin: 0; padding: 0 0 14px 14px; width: 338px;"
+                            class="dropdown-menu dropdown-menu-right">
+
+                            <li
+                                style="display: inline-block; height: 84px; list-style-type: none; padding: 6px; position: relative; transition: transform .2s cubic-bezier(.333,0,0,1); vertical-align: top; width: 84px;">
+
+                                <a class="text-center" href="{{ url_for('dashboard')}}">
+
+                                    <div class="text-center"><img
+                                            src="https://amisplatform.misacdn.net/images/iconapps/market/newsfeed.svg"
+                                            alt="" style="width: 50%; height: auto" srcset=""><span
+                                            style="background-image: url('https://lh3.google.com/u/0/ogw/ADea4I5emc1qkl-QTXYcb4K7IzEhYg2c5jBPLLpRgWxT=s128-b16-cc-rp-mo');"></span>
+
+                                    </div><br><span class="text-center">Dashboard</span>
+
+                                </a>
+
+                            </li>
+
+                            <li
+                                style="display: inline-block; height: 84px; list-style-type: none; padding: 6px; position: relative; transition: transform .2s cubic-bezier(.333,0,0,1); vertical-align: top; width: 84px;">
+
+                                <a class="text-center" href="Home/ManageAccount">
+
+                                    <div class="text-center"><img
+                                            src="https://amisplatform.misacdn.net/images/iconapps/system.svg?_=20211108"
+                                            alt="" s style="width: 50%; height: auto" srcset=""><span
+                                            style="background-image: url('https://lh3.google.com/u/0/ogw/ADea4I5emc1qkl-QTXYcb4K7IzEhYg2c5jBPLLpRgWxT=s128-b16-cc-rp-mo');"></span>
+
+                                    </div><br><span class="text-center">Tài khoản</span>
+
+                                </a>
+
+                            </li>
+
+                            <li
+                                style="display: inline-block; height: 84px; list-style-type: none; padding: 6px; position: relative; transition: transform .2s cubic-bezier(.333,0,0,1); vertical-align: top; width: 84px;">
+
+                                <a class="text-center" href="Home/ManageMember">
+
+                                    <div class="text-center"><img
+                                            src="https://amisplatform.misacdn.net/images/iconapps/market/employeeself.svg"
+                                            alt="" s style="width: 50%; height: auto" srcset=""><span
+                                            style="background-image: url('https://lh3.google.com/u/0/ogw/ADea4I5emc1qkl-QTXYcb4K7IzEhYg2c5jBPLLpRgWxT=s128-b16-cc-rp-mo');"></span>
+
+                                    </div><br><span class="text-center">Thành viên</span>
+
+                                </a>
+
+                            </li>
+
+                            <li
+                                style="display: inline-block; height: 84px; list-style-type: none; padding: 6px; position: relative; transition: transform .2s cubic-bezier(.333,0,0,1); vertical-align: top; width: 84px;">
+
+                                <a class="text-center" href="Home/ManageCalendar">
+
+                                    <div class="text-center"><img
+                                            src="https://amisplatform.misacdn.net/images/iconapps/market/amiscrm2.svg"
+                                            alt="" s style="width: 50%; height: auto" srcset=""><span
+                                            style="background-image: url('https://lh3.google.com/u/0/ogw/ADea4I5emc1qkl-QTXYcb4K7IzEhYg2c5jBPLLpRgWxT=s128-b16-cc-rp-mo');"></span>
+
+                                    </div><br><span class="text-center">Lịch trực</span>
+
+                                </a>
+
+                            </li>
+
+                            <li
+                                style="display: inline-block; height: 84px; list-style-type: none; padding: 6px; position: relative; transition: transform .2s cubic-bezier(.333,0,0,1); vertical-align: top; width: 84px;">
+
+                                <a class="text-center" href="Home/ManageEvent">
+
+                                    <div class="text-center"><img
+                                            src="https://amismisa.misacdn.net/apps/aimarketing/assets/images/ai-newlogo.png"
+                                            alt="" style="width: 50%; height: auto" srcset=""><span
+                                            style="background-image: url('https://lh3.google.com/u/0/ogw/ADea4I5emc1qkl-QTXYcb4K7IzEhYg2c5jBPLLpRgWxT=s128-b16-cc-rp-mo');"></span>
+
+                                    </div><br><span class="text-center">Sự kiện</span>
+
+                                </a>
+
+                            </li>
+
+                            <li
+                                style="display: inline-block; height: 84px; list-style-type: none; padding: 6px; position: relative; transition: transform .2s cubic-bezier(.333,0,0,1); vertical-align: top; width: 84px;">
+
+                                <a class="text-center" href="Home/ManageFix">
+
+                                    <div class="text-center"><img
+                                            src="https://amisplatform.misacdn.net/images/iconapps/market/task.svg"
+                                            alt="" s style="width: 50%; height: auto" srcset=""><span
+                                            style="background-image: url('https://lh3.google.com/u/0/ogw/ADea4I5emc1qkl-QTXYcb4K7IzEhYg2c5jBPLLpRgWxT=s128-b16-cc-rp-mo');"></span>
+
+                                    </div><br><span class="text-center">Sửa máy</span>
+
+                                </a>
+
+                            </li>
+
+                            <li
+                                style="display: inline-block; height: 84px; list-style-type: none; padding: 6px; position: relative; transition: transform .2s cubic-bezier(.333,0,0,1); vertical-align: top; width: 84px;">
+
+                                <a class="text-center" href="Home/Attendance">
+
+                                    <div class="text-center"><img
+                                            src="https://amisplatform.misacdn.net/images/iconapps/market/timesheet.svg"
+                                            alt="" s style="width: 50%; height: auto" srcset=""><span
+                                            style="background-image: url('https://lh3.google.com/u/0/ogw/ADea4I5emc1qkl-QTXYcb4K7IzEhYg2c5jBPLLpRgWxT=s128-b16-cc-rp-mo');"></span>
+
+                                    </div><br><span class="text-center">Điểm danh</span>
+
+                                </a>
+
+                            </li>
+
+
+
+                            <li
+                                style="display: inline-block; height: 84px; list-style-type: none; padding: 6px; position: relative; transition: transform .2s cubic-bezier(.333,0,0,1); vertical-align: top; width: 84px;">
+
+                                <a class="text-center" href="Home/InfoSoftWare">
+
+                                    <div class="text-center"><img
+                                            src="https://amisplatform.misacdn.net/images/iconapps/market/process.svg"
+                                            alt="" s style="width: 50%; height: auto" srcset=""><span
+                                            style="background-image: url('https://lh3.google.com/u/0/ogw/ADea4I5emc1qkl-QTXYcb4K7IzEhYg2c5jBPLLpRgWxT=s128-b16-cc-rp-mo');"></span>
+
+                                    </div><br><span class="text-center">Thông tin</span>
+
+                                </a>
+
+                            </li>
+
+                            <li
+                                style="display: inline-block; height: 84px; list-style-type: none; padding: 6px; position: relative; transition: transform .2s cubic-bezier(.333,0,0,1); vertical-align: top; width: 84px;">
+
+                                <a class="text-center" href="{{ url_for('logout')}}">
+
+                                    <div class="text-center"><img
+                                            src="https://externalapi.mshopkeeper.vn/resources/images/Logo_eShop_1.svg"
+                                            alt="" s style="width: 50%; height: auto" srcset=""><span
+                                            style="background-image: url('https://lh3.google.com/u/0/ogw/ADea4I5emc1qkl-QTXYcb4K7IzEhYg2c5jBPLLpRgWxT=s128-b16-cc-rp-mo');"></span>
+
+                                    </div><br><span class="text-center">Đăng xuất</span>
+
+                                </a>
+
+                            </li>
+
+
+
+                        </ul> -->
+
+
+                        <!-- END TOP-RIGHT TOOLBAR-->
+
+            </div>
+
+        </header>
+
+        <!-- END HEADER--><!-- END HEADER-->
+        <!-- START SIDEBAR-->
+        <nav style="background-color: #0b3c81;" class="page-sidebar" id="sidebar">
+
+            <div id="sidebar-collapse">
+
+                <div class="admin-block d-flex">
+
+                    <div>
+                        <img class="img-circle" src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
+                            width="45px" />
+                    </div>
+
+                    <div class="admin-info">
+
+                        <div class="font-strong">Administrator</div>
+                        <small><i class="fa fa-circle text-success"></i> Online</small>
+
+                    </div>
+
+                </div>
+
+
+                <ul id="myUL" class="side-menu metismenu">
+
+                    <li>
+
+                        <a target="_self" class="active" href="{{ url_for('dashboard')}}"><i
+                                class="sidebar-item-icon fa fa-gauge"></i>
+
+                            <span class="nav-label">Tổng quan hệ thống</span>
+
+                        </a>
+
+                    </li>
+
+                    <li class="heading">THAO TÁC CHUNG</li>
+
+                    <!-- <li>
+
+                        <a target="_self" href="Home/ManageAccount"><i class="sidebar-item-icon fa fa-user-gear"></i>
+
+                            <span class="nav-label">Quản lý tài khoản</span></a>
+
+                    </li> -->
+                    <li>
+
+                        <a target="_self" href="javascript:;"><i class="sidebar-item-icon fa-solid fa-chart-pie"></i>
+
+                            <span class="nav-label">Thống kê nguồn tin</span><i class="fa fa-angle-left arrow"></i></a>
+
+                        <ul class="nav-2-level collapse">
+
+                            <li>
+
+                                <a target="_self" href="{{ url_for('fake_news_published')}}">Tin giả được công bố</a>
+
+                            </li>
+
+                            <li>
+
+                                <a target="_self" href="{{ url_for('real_news_published')}}">Tin thật được công bố</a>
+
+                            </li>
+                        </ul>
+
+                    </li>
+
+                    <li>
+
+                        <a target="_self" href="javascript:;"><i class="sidebar-item-icon fa-solid fa-comments"></i>
+
+                            <span class="nav-label">Quản lý diễn đàn</span><i class="fa fa-angle-left arrow"></i></a>
+
+                        <ul class="nav-2-level collapse">
+
+                            <li>
+
+                                <a target="_self" href="{{ url_for('uncensored_new')}}">Tin tức chưa kiểm duyệt</a>
+
+                            </li>
+
+                            <li>
+
+                                <a target="_self" href="{{ url_for('censored_new')}}">Tin tức đã kiểm duyệt</a>
+
+                            </li>
+                            <li>
+
+                                <a target="_self" href="{{ url_for('deny_new')}}">Tin tức từ chối kiểm duyệt</a>
+
+                            </li>
+
+                        </ul>
+
+                    </li>
+
+                    <li class="heading">THAO TÁC KHÁC</li>
+
+                    <li>
+
+                        <a target="_blank" href="https://youtu.be/0-u4w861c-w"><i
+                                class="sidebar-item-icon fa fa-book"></i>
+
+                            <span class="nav-label">Hướng dẫn sử dụng</span></a>
+
+                    </li>
+                    <li>
+
+                        <a target="_self" href="Home/InfoSoftWare"><i class="sidebar-item-icon fa fa-circle-info"></i>
+
+                            <span class="nav-label">Thông tin phần mềm</span></a>
+
+                    </li>
+
+                    <!-- <li>
+
+                        <a target="_self" href="Home/ChangePassWord"><i class="sidebar-item-icon fa fa-key"></i>
+
+                            <span class="nav-label">Đổi mật khẩu</span></a>
+
+                    </li> -->
+                    <li>
+
+                        <a target="_self" href="{{ url_for('logout')}}"><i
+                                class="sidebar-item-icon fa fa-power-off"></i>
+
+                            <span class="nav-label">Đăng xuất</span></a>
+
+                    </li>
+
+                </ul>
+
+
+
+
+            </div>
+
+        </nav>
+
+        <script>
+            function myFunction() {
+
+                return toastr.warning("Chức năng đang được cập nhật vui lòng thử lại sau!");
+
+            }
+        </script>
+
+        <!-- END SIDEBAR-->
+        <!-- START PAGE CONTENT-->
+
+
+        <div class="content-wrapper">
+            <div class="ex-basic-2 mt-3">
+                <div class="container">
+                    <h4>Tin tức chưa được kiểm duyệt</h4>
+                    <div class="row">
+                        {% for forum in forums_list %}
+                        <div class="col-md-4">
+                            <div class="card mb-4 box-shadow" style="height: 95%;">
+                                <img class="card-img-top" src="{{forum.ImageUpload}}"
+                                    style="max-width: auto;max-height: 200px;" data-holder-rendered="true">
+                                <div class="card-body">
+                                    <a class="card-text blue" style="padding-top:5px" href="/view/{{forum._id}}"
+                                        class="btn btn-sm btn-secondary">{{forum.Title }}</a>
+                                    <h6 class="card-subtitle mt-2 mb-2 text-muted">{{forum.DatePost}}</h6>
+                                    {% if forum.Label == 1 %}
+                                    <span class="badge badge-success">Tin thật</span>
+                                    {% else %}
+                                    <span class="badge badge-danger">Tin giả</span>
+                                    {% endif %}
+
+                                    {% if forum.Status == 1 %}
+                                    <span class="badge badge-success">Đã phê duyệt</span>
+                                    {% elif forum.Status == 0 %}
+                                    <span class="badge badge-danger">Chưa phê duyệt</span>
+                                    {% elif forum.Status == 2 %}
+                                    <span class="badge badge-secondary">Từ chối phê duyệt</span>
+                                    {% endif %}
+                                    <!-- <a data-idforums="{{forum._id}}" class="float-right pt-2 btndelete" target="_self" data-toggle="modal" data-target="#exampleModal" data-bs-toggle="modal"
+                                        data-bs-target="#exampleModal"><i class="fa-solid fa-trash"></i></a> -->
+                                    <div class="btn-group">
+                                        <button class="btn btn-primary dropdown-toggle btn-sm" data-toggle="dropdown"
+                                            aria-expanded="false"><i class="fa fa-cogs"></i><i
+                                                class="fa fa-angle-down"></i></button>
+                                        <ul class="dropdown-menu" x-placement="bottom-start"
+                                            style="position: absolute; transform: translate3d(0px, 26px, 0px); top: 0px; left: 0px; will-change: transform;">
+                                            <li style="width: 78%">
+                                                <form action="/uncensoreds/{{forum._id}}/1" method="POST">
+                                                    <button class="dropdown-item" href="javascript:;"><i
+                                                            class="fa-solid fa-circle-check text-success"></i>
+                                                        Phê duyệt</button>
+                                                </form>
+                                                <form action="/uncensoreds/{{forum._id}}/2" method="POST">
+                                                    <button class="dropdown-item" href="javascript:;"><i
+                                                            class="fa-solid fa-circle-xmark text-danger"></i>
+                                                        Từ chối</button>
+                                                </form>
+                                            </li>
+                                            <li>
+                                                <a target="_self" class="btn float-right" data-toggle="modal"
+                                                    data-target="#exampleModal" data-idforums="{{forum._id}}"
+                                                    data-iduser="{{id_user}}"><i class="fa fa-trash"
+                                                        style="color:#5f4dee"></i> Xóa</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="modal fade" id="exampleModal" tabindex="-1"
+                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Xác nhận xóa</h5>
+                            <button type="button" id="closed" class="btn-close"
+                                data-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <img class="card-img-top"
+                                        src="https://res.cloudinary.com/dz9j1pqvk/image/upload/v1681580160/delete_zf6pp6.png"
+                                        style="height: 150px; width:auto;display: block; margin-left: auto; margin-right: auto;"
+                                        data-holder-rendered="true">
+                                    <br>
+                                    <p class="text-center">Bạn có chắc chắn muốn xóa bài viết
+                                        này hay không? <span id="itemId"
+                                            style="display: none;"></span> <span
+                                            style="display: none;" id="userId"></span></p>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" id="closed" class="btn btn-secondary"
+                                data-dismiss="modal">Hủy </button>
+                            <button type="button" class="btn btn-danger"
+                                id="deleteBtn">Xóa</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                <nav d aria-label="Page navigation example">
+                    <ul class="pagination justify-content-center mt-5">
+                        <li class="page-item">
+                            <a style="color:#5f4dee;" class="page-link" href="/admin/uncensored_new?page={{ page - 1}}"
+                                aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                        </li>
+                        <li class="page-item"><a style="color:#5f4dee; background-color: #5f4dee; color:white"
+                                class="page-link" href="/admin/uncensored_new?page={{ page}}">{{ page}}</a></li>
+                        <li class="page-item"><a style="color:#5f4dee;" class="page-link"
+                                href="/admin/uncensored_new?page={{ page+1}}">{{ page + 1}}</a></li>
+                        <li class="page-item"><a style="color:#5f4dee;" class="page-link"
+                                href="/admin/uncensored_new?page={{ page +2}}">{{ page+2}}</a></li>
+                        <li class="page-item">
+                            <a style="color:#5f4dee;" class="page-link" href="/admin/uncensored_new?page={{ page + 1}}"
+                                aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+
+            </div>
+
+
+        </div>
+
+
+        <script src="https://it-zone.club/public/assets/vendors/jquery/dist/jquery.min.js"
+            type="text/javascript"></script>
+
+        <script src="https://it-zone.club/public/assets/vendors/popper.js/dist/umd/popper.min.js"
+            type="text/javascript"></script>
+
+        <script src="https://it-zone.club/public/assets/vendors/bootstrap/dist/js/bootstrap.min.js"
+            type="text/javascript"></script>
+
+        <script src="https://it-zone.club/public/assets/vendors/metisMenu/dist/metisMenu.min.js"
+            type="text/javascript"></script>
+
+        <script src="https://it-zone.club/public/assets/vendors/jquery-slimscroll/jquery.slimscroll.min.js"
+            type="text/javascript"></script>
+        <script src="https://it-zone.club/public/assets/vendors/jquery-sparkline/dist/jquery.sparkline.min.js"
+            type="text/javascript"></script>
+        <script src="phttps://it-zone.club/ublic/assets/js/scripts/sparkline-demo.js" type="text/javascript"></script>
+        <!-- PAGE LEVEL PLUGINS-->
+        <!-- CORE SCRIPTS-->
+        <script src="https://it-zone.club/public/assets/js/app.min.js" type="text/javascript"></script>
+        <!-- PAGE LEVEL SCRIPTS-->
+
+
+        <script src="https://it-zone.club/public/assets/vendors/DataTables/datatables.min.js"
+            type="text/javascript"></script>
+
+        <script type="text/javascript">
+            $(function () {
+
+                $('#example-table').DataTable({
+
+                    pageLength: 10,
+
+                    //"ajax": 'assets/demo/data/table_data.json',
+
+                    /*"columns": [
+                        { "data": "name" },
+            
+                        { "data": "office" },
+            
+                        { "data": "extn" },
+            
+                        { "data": "start_date" },
+            
+                        { "data": "salary" }
+            
+                    ]*/
+
+                });
+
+                $('#example-tables').DataTable({
+                    pageLength: 10,
+                    //"ajax": 'assets/demo/data/table_data.json',
+                    /*"columns": [
+                        { "data": "name" },
+                        { "data": "office" },
+                        { "data": "extn" },
+                        { "data": "start_date" },
+                        { "data": "salary" }
+                    ]*/
+                });
+            })
+        </script>
+
+        <script>
+            if (window.history.replaceState) {
+
+                window.history.replaceState(null, null, window.location.href);
+
+            }
+        </script>
+
+        <script>
+            CKEDITOR.replace('contentpost');
+
+            config.resize_maxWidth = 800;
+
+            config.resize_maxHeight = 600;
+        </script>
+
+<script>
+
+    $('#exampleModal').on('show.bs.modal', function (event) {
+
+        var button = $(event.relatedTarget) // Button that triggered the modal
+
+        var idforums = button.data('idforums') // Extract info from data-* attributes
+        var iduser = button.data('iduser') // Extract info from data-* attributes
+        $('#itemId').text(idforums);
+        $('#userId').text(iduser);
+        console.log(idforums);
+        console.log(iduser);
+
+    })
+
+    // Gắn sự kiện cho nút xóa
+    $('#deleteBtn').click(function () {
+        var itemId = $('#itemId').text();
+        var userId = $('#userId').text();
+        var data = {
+            itemId: itemId, // Giá trị ID của đối tượng cần xóa
+            userId: userId, // Ví dụ dữ liệu cần gửi lên server
+            page: 0 // Ví dụ dữ liệu cần gửi lên server
+        };
+        // Lấy giá trị ID của đối tượng cần xóa từ HTML, ví dụ: $('#itemId').text();
+        // Gửi yêu cầu xóa dữ liệu lên server với ID của đối tượng cần xóa
+        $.ajax({
+            url: '/deleteforum', // Đường dẫn đến endpoint xử lý yêu cầu xóa dữ liệu trên server
+            type: 'POST', // Phương thức POST
+            data: data, // Dữ liệu cần gửi lên server
+            success: function (response) {
+                // Xử lý kết quả trả về từ server khi yêu cầu thành công
+                console.log(response);
+                // Thực hiện các hành động sau khi xóa dữ liệu thành công
+            },
+            error: function (xhr, status, error) {
+                // Xử lý lỗi khi yêu cầu không thành công
+                console.log(xhr.responseText);
+            }
+        });
+        window.location.replace(window.location.pathname + window.location.search + window.location.hash);
+        // does not create a history entry
+        window.location.href = window.location.pathname + window.location.search + window.location.hash;
+    });
+
+    // Gắn sự kiện cho nút xóa
+    $('#closed').click(function () {
+       $('#myModal').modal('hide');
+    });
+</script>
+
+
+</body>
+
+
+
+</html>

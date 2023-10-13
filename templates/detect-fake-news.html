@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- SEO Meta Tags -->
+    <meta name="description"
+        content="Tivo is a HTML landing page template built with Bootstrap to help you crate engaging presentations for SaaS apps and convert visitors into users.">
+    <meta name="author" content="Inovatik">
+
+    <!-- Website Title -->
+    <title>Phát hiện tin giả bằng Machine Learning </title>
+    <!-- Styles -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700&display=swap&subset=latin-ext"
+        rel="stylesheet">
+    <link href="{{ url_for('static',filename='css/bootstrap.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static',filename='css/fontawesome-all.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static',filename='css/styles.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static',filename='css/swiper.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static',filename='css/magnific-popup.css') }}" rel="stylesheet">
+
+    <!-- <link href="css/fontawesome-all.css" rel="stylesheet">
+    <link href="css/swiper.css" rel="stylesheet">
+	<link href="css/magnific-popup.css" rel="stylesheet">
+	<link href="css/styles.css" rel="stylesheet"> -->
+
+    <!-- Favicon  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+        integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="icon"
+        href="https://media1.giphy.com/media/f9xvcrzFdRaHATv6me/giphy.gif?cid=6c09b95256e366c2930ac6483563c01a1c5f9a6d8e1e27ce&rid=giphy.gif&ct=s">
+</head>
+
+<body data-spy="scroll" data-target=".fixed-top">
+
+    <!-- Preloader -->
+    <div class="spinner-wrapper">
+        <div class="spinner">
+            <div class="bounce1"></div>
+            <div class="bounce2"></div>
+            <div class="bounce3"></div>
+        </div>
+    </div>
+    <!-- end of preloader -->
+
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
+        <div class="container">
+
+            <!-- Text Logo - Use this if you don't have a graphic logo -->
+            <!-- <a class="navbar-brand logo-text page-scroll" href="index.html">Tivo</a> -->
+
+            <!-- Image Logo -->
+            <div class="navbar-brand" href="index.html">
+                {{name_1}} {% if not pictures %}
+                <h6 class="text-white"></h6><img width="90" style="height: auto; border-radius: 50%;"
+                    src="https://media1.giphy.com/media/f9xvcrzFdRaHATv6me/giphy.gif?cid=6c09b95256e366c2930ac6483563c01a1c5f9a6d8e1e27ce&rid=giphy.gif&ct=s"
+                    alt="alternative"></h6>{% else %}
+                <h6 class="text-white"><img style="border-radius: 50%;" width="45" class="img-rounded"
+                        src="{{ pictures }}" alt="User Logo"> Xin chào {{names}}</h6>
+                {% endif %}
+            </div>
+
+            <!-- Mobile Menu Toggle Button -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+                aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-awesome fas fa-bars"></span>
+                <span class="navbar-toggler-awesome fas fa-times"></span>
+            </button>
+            <!-- end of mobile menu toggle button -->
+
+            <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link page-scroll" href="{{ url_for('index')}}">TRANG CHỦ <span
+                                class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link page-scroll" href="{{ url_for('forum')}}">DIỄN ĐÀN</a>
+                    </li>
+                    <!-- <li class="nav-item">
+                        <a class="nav-link page-scroll" href="#details">TIN GIẢ</a>
+                    </li> -->
+
+                    <!-- Dropdown Menu -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle page-scroll" href="" id="navbarDropdown" role="button"
+                            aria-haspopup="true" aria-expanded="false">HƯỚNG DẪN</a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{{ url_for('detectfakenews')}}"><span class="item-text">HƯỚNG
+                                    DẪN CÁCH NHẬN BIẾT, PHÒNG TRÁNH TIN GIẢ </span></a>
+                            <div class="dropdown-items-divide-hr"></div>
+                            <a class="dropdown-item" href="{{ url_for('usermanual')}}"><span class="item-text">HƯỚNG DẪN
+                                    SỬ DỤNG TRANG WEB </span></a>
+                        </div>
+                    </li>
+                    <!-- end of dropdown menu -->
+
+                    <li class="nav-item">
+                        <a class="nav-link page-scroll" href="{{ url_for('check')}}">KIỂM TRA</a>
+                    </li>
+
+                    {% if not names %}
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link page-scroll" href="{{ url_for('post')}}">ĐĂNG BÀI</a>
+                    </li>
+                    {% endif %}
+
+                </ul>
+                <span class="nav-item">
+                    {% if not names %}
+                    <a class="btn-outline-sm" href="{{ url_for('login')}}"><i class="fa-brands fa-google"></i> ĐĂNG
+                        NHẬP</a>
+                    {% else %}
+                    <a class="btn-outline-sm" href="{{ url_for('logout')}}"><i
+                            class="fa-solid fa-right-from-bracket"></i> ĐĂNG XUẤT</a>
+                    {% endif %}
+                </span>
+            </div>
+        </div>
+        <!-- end of container -->
+    </nav>
+    <!-- end of navbar -->
+    <!-- end of navigation -->
+
+
+    <!-- Header -->
+    <header id="header" class="header">
+        <div class="header-content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 col-xl-12">
+                        <h2 class="text-white text-center">Hướng dẫn cách nhận biết, phòng tránh tin giả</h2>
+                        <div class="row">
+                            <div class="col-md-2"></div>
+                            <div class="col-md-8">
+                                <p class="p-large text-left">
+                                    Để phát hiện tin giả, bạn cần thực hiện một số bước như kiểm tra nguồn tin, đánh giá
+                                    tính xác thực của tin tức và cân nhắc các giả thuyết. Dưới đây là hướng dẫn chi tiết
+                                    về cách nhận biết tin giả mà chúng tôi sẽ cung cấp cho bạn.
+                                </p>
+                            </div>
+                            <div class="col-md-2"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="image-container d-flex justify-content-center ">
+                                    <div class="img-wrapper">
+                                        <div style="transform: rotate(0deg);">
+                                            <img style="width: 90%;border-radius: 3%;" class="img-fluid shadow"
+                                                src="{{ url_for('static',filename='images/image-center.png') }}"
+                                                alt="alternative">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <a class="btn-solid-lg page-scroll text-center" href="#details">Bắt đầu</a> -->
+                        <!-- end of text-container -->
+
+                    </div>
+
+                    <!-- end of col -->
+
+                    <!-- end of col -->
+                </div>
+                <!-- end of row -->
+            </div>
+            <!-- end of container -->
+        </div>
+        <!-- end of header-content -->
+    </header>
+    <!-- end of header -->
+    <svg class="header-frame" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"
+        viewBox="0 0 1920 310">
+        <defs>
+            <style>
+                .cls-1 {
+                    fill: #5f4def;
+                }
+            </style>
+        </defs>
+        <title>header-frame</title>
+        <path class="cls-1"
+            d="M0,283.054c22.75,12.98,53.1,15.2,70.635,14.808,92.115-2.077,238.3-79.9,354.895-79.938,59.97-.019,106.17,18.059,141.58,34,47.778,21.511,47.778,21.511,90,38.938,28.418,11.731,85.344,26.169,152.992,17.971,68.127-8.255,115.933-34.963,166.492-67.393,37.467-24.032,148.6-112.008,171.753-127.963,27.951-19.26,87.771-81.155,180.71-89.341,72.016-6.343,105.479,12.388,157.434,35.467,69.73,30.976,168.93,92.28,256.514,89.405,100.992-3.315,140.276-41.7,177-64.9V0.24H0V283.054Z" />
+    </svg>
+    <!-- end of header -->
+
+    <div id="details" class="basic-1 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="text-container text-left">
+                        <h3>Cách nhận biết tin giả</h3>
+                        <p>Để phát hiện tin giả, bạn cần thực hiện một số bước như kiểm tra nguồn tin, đánh giá tính xác
+                            thực của tin tức và cân nhắc các giả thuyết.
+                            <br>Bên cạnh đó, sử dụng các công cụ và trang web hỗ trợ nhận diện tin giả cũng là một cách
+                            hiệu quả để phát hiện tin tức không đáng tin cậy.
+                            <br>Ảnh bên đây là hướng dẫn chi tiết về cách nhận biết tin giả mà chúng tôi sẽ cung cấp cho
+                            bạn.
+                        </p>
+                        <!-- {% if not names %}
+                        <a class="btn-solid-reg page-scroll" href="{{ url_for('login')}}"><i
+                                class="fa-brands fa-google"></i> ĐĂNG NHẬP</a> {% else %} {% endif %} -->
+
+                    </div>
+                    <!-- end of text-container -->
+                </div>
+                <!-- end of col -->
+                <div class="col-lg-6">
+                    <div class="image-container">
+                        <img class="d-block w-100"
+                            src="https://tingia.gov.vn/wp-content/uploads/2021/01/huongdannhanbiet-2-2.jpg"
+                            alt="First slide">
+                        <p class="text-center"><i>Nguồn: https://tingia.gov.vn/</i></p>
+                    </div>
+                    <!-- end of image-container -->
+                </div>
+                <div class="col-lg-12">
+                    <div class="above-heading">PHÒNG TRÁNH VÀ DỐI PHÓ TIN GIẢ</div>
+                    <h3 class="h2-heading text-center">Cách phòng tránh và đối phó với tin giả</h3>
+                    <div class="text-container text-left">
+                        <p>Tin giả hiện nay đang trở thành một vấn đề nghiêm trọng trên mạng xã hội và các phương tiện
+                            truyền thông. Tin giả có thể gây ra những hậu quả tiêu cực, từ tác động đến quan điểm của
+                            người đọc đến ảnh hưởng lớn đến sự kiện, chính trị và kinh tế của một quốc gia.
+                            Vì vậy, để phòng tránh và đối phó với tin giả, chúng ta có thể thực hiện các bước sau:
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="text-container text-left">
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <ul class="list-unstyled">
+                                    <li class="d-flex">
+                                        <span class="fa-stack-1x ml-2"
+                                            style="background-color: #7B68EE; border-radius: 50%; color: white; height: 25px; line-height: 25px; text-align: center; width: 25px; margin: 0 auto; font-size: 20px;">1</span>
+                                        <div class="flex-grow-1 ml-5">
+                                            <h5>Kiểm tra nguồn tin</h5>
+                                            <p> Luôn kiểm tra nguồn tin trước khi chia sẻ bất kỳ tin tức nào. Nếu nguồn
+                                                tin không rõ ràng hoặc không được biết đến, đừng chia sẻ hay tin tưởng
+                                                vào tin tức đó.</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-lg-4">
+                                <ul class="list-unstyled">
+                                    <li class="d-flex">
+                                        <span class="fa-stack-1x ml-2"
+                                            style="background-color: #7B68EE; border-radius: 50%; color: white; height: 25px; line-height: 25px; text-align: center; width: 25px; margin: 0 auto; font-size: 20px;">2</span>
+                                        <div class="flex-grow-1 ml-5">
+                                            <h5>Kiểm tra nội dung</h5>
+                                            <p> Hãy đọc kỹ nội dung tin để tìm ra các dấu hiệu của tin giả. Nếu tin tức có nhiều lỗi chính tả, ngôn ngữ không chính xác hoặc nội dung quá sốc hoặc quá khủng bố, thì có thể đó là một tin giả.</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-lg-4">
+                                <ul class="list-unstyled">
+                                    <li class="d-flex">
+                                        <span class="fa-stack-1x ml-2"
+                                            style="background-color: #7B68EE; border-radius: 50%; color: white; height: 25px; line-height: 25px; text-align: center; width: 25px; margin: 0 auto; font-size: 20px;">3</span>
+                                        <div class="flex-grow-1 ml-5">
+                                            <h5>Xác thực thông tin</h5>
+                                            <p>Hãy tìm cách xác thực thông tin trước khi tin vào nó. Bạn có thể tìm kiếm các nguồn tin khác để kiểm tra xem thông tin đó có được xác nhận hay không.</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <ul class="list-unstyled">
+                                    <li class="d-flex">
+                                        <span class="fa-stack-1x ml-2"
+                                            style="background-color: #7B68EE; border-radius: 50%; color: white; height: 25px; line-height: 25px; text-align: center; width: 25px; margin: 0 auto; font-size: 20px;">4</span>
+                                        <div class="flex-grow-1 ml-5">
+                                            <h5>Cẩn thận với tin tức chưa được xác thực</h5>
+                                            <p>Nếu tin tức chưa được xác thực, hãy cẩn thận khi chia sẻ hoặc tin vào nó. Đừng lan truyền các tin đồn hoặc thông tin sai lệch mà không có bằng chứng xác thực.</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-lg-4">
+                                <ul class="list-unstyled">
+                                    <li class="d-flex">
+                                        <span class="fa-stack-1x ml-2"
+                                            style="background-color: #7B68EE; border-radius: 50%; color: white; height: 25px; line-height: 25px; text-align: center; width: 25px; margin: 0 auto; font-size: 20px;">5</span>
+                                        <div class="flex-grow-1 ml-5">
+                                            <h5>Sử dụng các công cụ hỗ trợ</h5>
+                                            <p> Có nhiều công cụ trực tuyến có thể giúp bạn kiểm tra tính đáng tin cậy của một tin tức. Ví dụ như các công cụ kiểm tra tin giả, công cụ đối chiếu nguồn tin, công cụ tra cứu báo chí...</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-lg-4">
+                                <ul class="list-unstyled">
+                                    <li class="d-flex">
+                                        <span class="fa-stack-1x ml-2"
+                                            style="background-color: #7B68EE; border-radius: 50%; color: white; height: 25px; line-height: 25px; text-align: center; width: 25px; margin: 0 auto; font-size: 20px;">6</span>
+                                        <div class="flex-grow-1 ml-5">
+                                            <h5>Tăng cường kiến thức:</h5>
+                                            <p>Để tránh bị lừa đảo bởi những tin tức giả mạo, bạn cần tăng cường kiến thức và cảnh giác với các thông tin không chính xác. Hãy cập nhật thông tin mới nhất về các thủ đoạn lừa đảo mới để có thể phòng tránh tốt hơn.</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+
+                        </div>
+                        <div class="text-container text-left">
+                            <p>Các bước này sẽ giúp bạn kiểm tra và đảm bảo tính xác thực của tin tức trước khi chia sẻ và đồng thời giúp ngăn chặn sự lan truyền của tin giả và bảo vệ người khác khỏi những hậu quả tiêu cực của tin giả.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- end of col -->
+            </div>
+
+
+            <!-- end of row -->
+        </div>
+        <!-- end of container -->
+
+    </div>
+
+    <!-- Copyright -->
+    <div class="copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <p class="p-small">Copyright &copy; 2023. All Rights Reserved.</a>
+                    </p>
+                </div>
+                <!-- end of col -->
+            </div>
+            <!-- enf of row -->
+        </div>
+        <!-- end of container -->
+    </div>
+    <!-- end of copyright -->
+    <!-- end of copyright -->
+
+
+    <!-- Scripts -->
+    <script src="{{ url_for('static',filename='js/jquery.min.js') }}">
+    </script>
+    <script src="{{ url_for('static',filename='js/popper.min.js') }}">
+    </script>
+    <script src="{{ url_for('static',filename='js/bootstrap.min.js') }}">
+    </script>
+    <script src="{{ url_for('static',filename='js/jquery.easing.min.js') }}">
+    </script>
+    <script src="{{ url_for('static',filename='js/swiper.min.js.js') }}">
+    </script>
+    <script src="{{ url_for('static',filename='js/jquery.magnific-popup.js') }}">
+    </script>
+    <script src="{{ url_for('static',filename='js/validator.min.js') }}">
+    </script>
+    <script src="{{ url_for('static',filename='js/scripts.js') }}">
+    </script>
+
+    <script>
+        function typingEffect() {
+            const contactTexts = shuffleArray(['Hướng dẫn cách nhận biết tin giả']);
+            const typedtext = document.getElementsByClassName("typedtext")[0];
+            let removing = false;
+            let idx = char = 0;
+            setInterval(() => { // We define the interval of the typing speed
+                // If we do not reach the limit, we insert characters in the html
+                if (char < contactTexts[idx].length) typedtext.innerHTML += contactTexts[idx][char];
+                // 15*150ms = time before starting to remove characters
+                if (char == contactTexts[idx].length + 15) removing = true;
+                // Removing characters, the last one always
+                if (removing) typedtext.innerHTML = typedtext.innerHTML.substring(0, typedtext.innerHTML.length - 1);
+                char++; // Next character
+                // When there is nothing else to remove
+                if (typedtext.innerHTML.length === 0) {
+                    // If we get to the end of the texts we start over
+                    if (idx === contactTexts.length - 1) idx = 0
+                    else idx++;
+                    char = 0; // Start the next text by the first character
+                    removing = false; // No more removing characters
+                }
+            }, 70); // Typing speed, 70 ms
+
+        }
+        typingEffect();
+
+        function shuffleArray(array) {
+            let currentIndex = array.length,
+                temporaryValue, randomIndex;
+
+            // While there remain elements to shuffle...
+            while (0 !== currentIndex) {
+
+                // Pick a remaining element...
+                randomIndex = Math.floor(Math.random() * currentIndex);
+                currentIndex -= 1;
+
+                // And swap it with the current element.
+                temporaryValue = array[currentIndex];
+                array[currentIndex] = array[randomIndex];
+                array[randomIndex] = temporaryValue;
+            }
+
+            return array;
+        }
+    </script>
+
+</body>
+
+</html>
