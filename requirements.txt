@@ -53,5 +53,4 @@ cloudinary
 transformers
 torch
 sentencepiece
-tensorflow>=2.0.0
-keras>=2.3.0
+
