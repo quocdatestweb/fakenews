@@ -6,7 +6,6 @@ from sklearn.linear_model import PassiveAggressiveClassifier
 import pickle
 import pandas as pd
 from sklearn.model_selection import train_test_split
-from sklearn.feature_extraction.text import TfidfVectorizer
 import re
 import string
 from sklearn.decomposition import TruncatedSVD
@@ -30,6 +29,12 @@ from googlesearch import search
 from pymongo import MongoClient
 from bson.objectid import ObjectId
 import random
+from werkzeug.utils import secure_filename
+from bs4 import BeautifulSoup
+
+
+
+
 tfvect = TfidfVectorizer(analyzer='word', max_features=4189, ngram_range=(1, 2))
 loaded_model = pickle.load(open('model/model.pkl', 'rb'))
 dataframe = pd.read_csv('data_new.csv',on_bad_lines='skip')
