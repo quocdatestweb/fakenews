@@ -31,6 +31,7 @@ from bson.objectid import ObjectId
 import random
 from werkzeug.utils import secure_filename
 from bs4 import BeautifulSoup
+import threading
 
 
 
@@ -793,9 +794,9 @@ def category(categories,pages):
     else:
         return render_template('category.html', names=session["name"], google_id=session["google_id"], pictures=session["picture"], forums_list=forums_list, page=page, newtop3=newtop3, newtop5=newtop5,newtop1=newtop1,categories=categories)
 
-if __name__ == '__main__':
-    #  Debug/Development
+def run_flask():
     app.run(debug=True, host="0.0.0.0", port="5000")
-    # Production
-    # http_server = WSGIServer(('', 5000), app)
-    # http_server.serve_forever()
+    
+if __name__ == '__main__':
+    flask_thread = threading.Thread(target=run_flask)
+    flask_thread.start()
