@@ -79,7 +79,7 @@ cloudinary.config(
 app = Flask("Fake News Detection App")  # naming our application
 UPLOAD_FOLDER = 'static/uploads/'
 client = MongoClient(
-    "mongodb+srv://quocdat51930:2TyF3b3x3yOnhIT4@webdetectfakenews.z898ahe.mongodb.net/?retryWrites=true&w=majority")
+    "mongodb+srv://quocdat51930:4c2xgsPcWejZlyqM@webdetectfakenews.z898ahe.mongodb.net/?retryWrites=true&w=majority")
 db = client.fakenews
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))
 UPLOAD_FOLDER = 'static/uploads/'
