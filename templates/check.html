@@ -111,7 +111,8 @@
 
                     <!-- Dropdown Menu -->
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle page-scroll" id="navbarDropdown" role="button" aria-haspopup="true" aria-expanded="false">HƯỚNG DẪN</a>
+                        <a class="nav-link dropdown-toggle page-scroll" href="" id="navbarDropdown" role="button"
+                            aria-haspopup="true" aria-expanded="false">HƯỚNG DẪN</a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="{{ url_for('detectfakenews')}}"><span class="item-text">HƯỚNG
                                     DẪN CÁCH NHẬN BIẾT, PHÒNG TRÁNH TIN GIẢ </span></a>
@@ -192,7 +193,7 @@
                     <!-- end of tabs links -->
                     <div class="form-message">
                         <div id="nmsgSubmit" class="text-center">
-                            <div class="resu"></div>
+                            <!-- <div class="resu"></div> -->
                         </div>
                     </div>
                     <!-- Tabs Content -->
@@ -250,13 +251,16 @@
                                 <!-- end of col -->
                                 <div class="col-lg-12">
                                     <div class="text-container"
-                                        style="max-width: 800px; margin: 10px auto; padding: 0 20px;color: #495057;">
+                                        style="color: #495057;">
                                         <table class="table table-bordered">
                                             <thead class="thead"
                                                 style="background-color: #5f4dee; color: #fff; display: none;">
                                                 <tr>
                                                     <th scope="col">STT</th>
-                                                    <th scope="col">Đường dẫn đề xuất xác minh nội dung</th>
+                                                    <th scope="col">Tên miền</th>
+                                                    <th scope="col" style="width: 180px">Đường dẫn đề xuất</th>
+                                                    <th scope="col">Nội dung</th>
+                                                    <th scope="col">Tỉ lệ tin thật</th>
                                                 </tr>
                                             </thead>
                                             <tbody class="results">
@@ -280,7 +284,7 @@
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="text-container"
-                                        style="max-width: 800px; margin: 10px auto; padding: 0 20px;color: #495057;">
+                                        style="color: #495057;">
                                         <form name="form1" action="{{ url_for('predicts')}}" method="POST"
                                             id="newsletterForm" data-toggle="validator" data-focus="false">
                                             <div class="form-group">
@@ -347,7 +351,11 @@
                                                 style="background-color: #5f4dee; color: #fff; display: none;">
                                                 <tr>
                                                     <th scope="col">STT</th>
-                                                    <th scope="col">Đường dẫn đề xuất xác minh nội dung</th>
+                                                    <th scope="col">Tên miền</th>
+                                                    <th scope="col" style="width: 180px">Đường dẫn đề xuất</th>
+                                                    <th scope="col">Nội dung</th>
+                                                    <th scope="col">Tỉ lệ tin thật</th>
+
                                                 </tr>
                                             </thead>
                                             <tbody class="results">
@@ -377,277 +385,310 @@
         <!-- end of container -->
     </div>
 
-    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+    <div class="modal fade" id="showDetail" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content" style="padding:15px;">
-                <h3 class="text-center" style="color:#5f4dee">PHẢN ÁNH TIN GIẢ TRỰC TUYẾN </h3>
-                <form name="formpost" action="{{ url_for('reflect')}}" method="POST" enctype="multipart/form-data">
-                    <div class="form-row mb-3">
-                        <div class="col-6 col-sm-6">
-                            <label for="to" class="col-form-label">Tiêu đề</label>
-                            <input style="display: none" type="text" name="iduser" class="form-control"
-                                value="{{google_id}}">
-                            <input style="display: none" type="text" name="pictures" class="form-control"
-                                value="{{pictures}}">
-                            <input style="display: none" type="text" name="nameuser" class="form-control"
-                                value="{{names}}">
-                            <input type="text" name="title" class="form-control" id="to" required>
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="myElement"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+        <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content" style="padding:15px;">
+                    <h3 class="text-center" style="color:#5f4dee">PHẢN ÁNH TIN GIẢ TRỰC TUYẾN </h3>
+                    <form name="formpost" action="{{ url_for('reflect')}}" method="POST" enctype="multipart/form-data">
+                        <div class="form-row mb-3">
+                            <div class="col-6 col-sm-6">
+                                <label for="to" class="col-form-label">Tiêu đề</label>
+                                <input style="display: none" type="text" name="iduser" class="form-control"
+                                    value="{{google_id}}">
+                                <input style="display: none" type="text" name="pictures" class="form-control"
+                                    value="{{pictures}}">
+                                <input style="display: none" type="text" name="nameuser" class="form-control"
+                                    value="{{names}}">
+                                <input type="text" name="title" class="form-control" id="to" required>
+                            </div>
+                            <div class="col-6 col-sm-6">
+                                <label for="cc" class="col-form-label">Số điện thoại:</label>
+                                <input type="text" name="phone" class="form-control" id="cc" required>
+                            </div>
                         </div>
-                        <div class="col-6 col-sm-6">
-                            <label for="cc" class="col-form-label">Số điện thoại:</label>
-                            <input type="text" name="phone" class="form-control" id="cc" required>
-                        </div>
-                    </div>
-                    <div class="form-row mb-3">
-                        <div class="col-6 col-sm-6">
-                            <label for="bcc" class=" col-form-label">Thể loại</label>
-                            <select name="type" class="form-control" required>
-                                <option value="law">Chính sách, pháp luật</option>
-                                <option value="disaster">Thiên tai, dịch bệnh</option>
-                                <option value="ecomomy">Kinh tế, chính trị</option>
-                                <option value="health">Lĩnh vực y tế, sản phẩm y tế liên quan đến sức khỏe con người
-                                </option>
-                                <option value="seciurity">An ninh quốc gia, Trật tự an toàn – xã hội</option>
-                                <option value="other">Khác</option>
-                            </select>
-                        </div>
-                        <div class="col-6 col-sm-6">
-                            <label for="bcc" class="col-form-label">Nhãn</label>
-                            <select name="label" class="form-control" required>
-                                <option value="0">Tin giả</option>
-                                <option value="1">Tin Thật</option>
-                            </select>
-                        </div>
+                        <div class="form-row mb-3">
+                            <div class="col-6 col-sm-6">
+                                <label for="bcc" class=" col-form-label">Thể loại</label>
+                                <select name="type" class="form-control" required>
+                                    <option value="law">Chính sách, pháp luật</option>
+                                    <option value="disaster">Thiên tai, dịch bệnh</option>
+                                    <option value="ecomomy">Kinh tế, chính trị</option>
+                                    <option value="health">Lĩnh vực y tế, sản phẩm y tế liên quan đến sức khỏe con người
+                                    </option>
+                                    <option value="seciurity">An ninh quốc gia, Trật tự an toàn – xã hội</option>
+                                    <option value="other">Khác</option>
+                                </select>
+                            </div>
+                            <div class="col-6 col-sm-6">
+                                <label for="bcc" class="col-form-label">Nhãn</label>
+                                <select name="label" class="form-control" required>
+                                    <option value="0">Tin giả</option>
+                                    <option value="1">Tin Thật</option>
+                                </select>
+                            </div>
 
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="inputPassword4">Link bài viết</label>
-                            <input type="text" class="form-control" name="link" id="inputPLink" required>
                         </div>
-                        <div class="form-group col-md-6">
-                            <label for="inputPassword4">Chọn ảnh</label>
-                            <div class="custom-file pt-3">
-                                <input type="file" class="custom-file-input" name="image_upload" id="image_upload"
-                                    onchange="loadFile(event)" required>
-                                <label class="custom-file-label" for="inputGroupFile01"></label>
-                                <!-- <div class="text-center">
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="inputPassword4">Link bài viết</label>
+                                <input type="text" class="form-control" name="link" id="inputPLink" required>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="inputPassword4">Chọn ảnh</label>
+                                <div class="custom-file pt-3">
+                                    <input type="file" class="custom-file-input" name="image_upload" id="image_upload"
+                                        onchange="loadFile(event)" required>
+                                    <label class="custom-file-label" for="inputGroupFile01"></label>
+                                    <!-- <div class="text-center">
                                     <img height="170" id="output"
                                         src="/static/images/news.png" />
                                 </div> -->
+                                </div>
                             </div>
-                        </div>
 
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-12 ml-auto">
-                            <div class="form-group">
-                                <label for="bcc" class="col-form-label">Tóm tắt</label>
-                                <textarea class="form-control" id="message" name="content" style="height: 300px;"
-                                    required></textarea>
-                            </div>
-                            <script>
-                                CKEDITOR.replace('content');
-                            </script>
-                            <div class="form-group">
-                                <div class="text-center">
-                                    <button type="submit" onclick="Check2()" name="reflect"
-                                        class="btn-solid-reg popup-with-move-anim">Gửi
-                                        phản
-                                        ánh</button>
-                                    <a type="button" data-dismiss="modal" class="btn-solid-reg popup-with-move-anim"
-                                        style="display: inline-block; padding: 1.1875rem 2.125rem 1.1875rem 2.125rem; border: 0.125rem solid #d9534f; border-radius: 2rem; background-color: #d9534f; color: #fff;">Hủy</a>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 ml-auto">
+                                <div class="form-group">
+                                    <label for="bcc" class="col-form-label">Tóm tắt</label>
+                                    <textarea class="form-control" id="message" name="content" style="height: 300px;"
+                                        required></textarea>
+                                </div>
+                                <script>
+                                    CKEDITOR.replace('content');
+                                </script>
+                                <div class="form-group">
+                                    <div class="text-center">
+                                        <button type="submit" onclick="Check2()" name="reflect"
+                                            class="btn-solid-reg popup-with-move-anim">Gửi
+                                            phản
+                                            ánh</button>
+                                        <a type="button" data-dismiss="modal" class="btn-solid-reg popup-with-move-anim"
+                                            style="display: inline-block; padding: 1.1875rem 2.125rem 1.1875rem 2.125rem; border: 0.125rem solid #d9534f; border-radius: 2rem; background-color: #d9534f; color: #fff;">Hủy</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    <style>
-        .preloader {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(255, 255, 255, 0.7);
-            /* đặt độ trong suốt ở giá trị alpha của rgba */
-            z-index: 9999;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .loader {
-            border: 16px solid #f3f3f3;
-            border-top: 16px solid #5f4dee;
-            border-radius: 50%;
-            width: 120px;
-            height: 120px;
-            animation: spin 2s linear infinite;
-        }
-
-        @keyframes spin {
-            0% {
-                transform: rotate(0deg);
-            }
-
-            100% {
-                transform: rotate(360deg);
-            }
-        }
-
-        .loading-text {
-            font-size: 24px;
-            margin-top: 20px;
-            font-weight: bold;
-            color: #5f4dee;
-            text-align: center;
-            text-transform: uppercase;
-        }
-
-        .enter-loading {
-            animation: enter-loading 2s ease-in-out;
-            animation-fill-mode: forwards;
-        }
-
-        @keyframes enter-loading {
-            0% {
-                opacity: 0;
-                transform: translateY(-50px);
-            }
-
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-    </style>
-
-    <div class="preloader" style="display:none;">
-        <div class="loader"></div>
-        <div class="loading-text enter-loading">Đang thực hiện tính toán</div>
-    </div>
-
-
-    <!-- end of tabs -->
-    <!-- Copyright -->
-    <div class="copyright">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <p class="p-small">Copyright &copy; 2023. All Rights Reserved.</a>
-                    </p>
+                    </form>
                 </div>
-                <!-- end of col -->
             </div>
-            <!-- enf of row -->
         </div>
-        <!-- end of container -->
-    </div>
-    <!-- end of copyright -->
-    <!-- end of copyright -->
-
-
-    <!-- Scripts -->
-    <!-- <script src="{{ url_for('static',filename='js/jquery.min.js') }}">
-    </script> -->
-    <script src="{{ url_for('static',filename='js/popper.min.js') }}">
-    </script>
-    <script src="{{ url_for('static',filename='js/bootstrap.min.js') }}">
-    </script>
-    <script src="{{ url_for('static',filename='js/jquery.easing.min.js') }}">
-    </script>
-    <script src="{{ url_for('static',filename='js/swiper.min.js.js') }}">
-    </script>
-    <script src="{{ url_for('static',filename='js/jquery.magnific-popup.js') }}">
-    </script>
-    <script src="{{ url_for('static',filename='js/validator.min.js') }}">
-    </script>
-    <script src="{{ url_for('static',filename='js/scripts.js') }}">
-    </script>
-    <!--     <script src="https://cdn.jsdelivr.net/gh/reymon359/web-experiments/Social%20Signature/socialsignature.min.js"
-        crossorigin="anonymous"></script> -->
-    <script>
-        // $(function () {
-        //     $('#message').click(function () {
-        //         $("#message").val("")
-        //         $('textarea').highlightTextarea('destroy');
-        //     });
-        // });
-        function readURL(input) {
-            if (input.files && input.files[0]) {
-
-                var reader = new FileReader();
-
-                reader.onload = function (e) {
-                    $('.image-upload-wrap').hide();
-
-                    $('.file-upload-image').attr('src', e.target.result);
-                    $('.file-upload-content').show();
-
-                    $('.image-title').html(input.files[0].name);
-                };
-
-                reader.readAsDataURL(input.files[0]);
-
-            } else {
-                removeUpload();
+        <style>
+            .preloader {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(255, 255, 255, 0.7);
+                /* đặt độ trong suốt ở giá trị alpha của rgba */
+                z-index: 9999;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
             }
-        }
 
-        function removeUpload() {
-            $('.file-upload-input').replaceWith($('.file-upload-input').clone());
-            $('.file-upload-content').hide();
-            $('.image-upload-wrap').show();
-        }
-        $('.image-upload-wrap').bind('dragover', function () {
-            $('.image-upload-wrap').addClass('image-dropping');
-        });
-        $('.image-upload-wrap').bind('dragleave', function () {
-            $('.image-upload-wrap').removeClass('image-dropping');
-        });
-    </script>
-    <script type="text/javascript">
-        function notify() {
-            $.notify("Access granted", "success");
-        }
+            .loader {
+                border: 16px solid #f3f3f3;
+                border-top: 16px solid #5f4dee;
+                border-radius: 50%;
+                width: 120px;
+                height: 120px;
+                animation: spin 2s linear infinite;
+            }
 
-    </script>
-    <script>
-        $(document).ready(function () {
-            $("#message").on('keyup', function () {
-                var words = 0;
-
-                if ((this.value.match(/\S+/g)) != null) {
-                    words = this.value.match(/\S+/g).length;
-                    $('.count').text(words);
+            @keyframes spin {
+                0% {
+                    transform: rotate(0deg);
                 }
 
-                // if (words > 200) {
-                //     toastr.error('Giới hạn tối đa là 200 từ.')
-                //         // Split the string on first 200 words and rejoin on spaces
-                //     var trimmed = $(this).val().split(/\s+/, 200).join(" ");
-                //     // Add a space at the end to make sure more typing creates new words
-                //     $(this).val(trimmed + " ");
-                // } else {
-                //     $('.count').text(words);
-                //     $('#message').text(200 - words);
-                // }
-            });
-        });
-    </script>
-    <script>
-        if (window.history.replaceState) {
-            window.history.replaceState(null, null, window.location.href);
-        }
-    </script>
+                100% {
+                    transform: rotate(360deg);
+                }
+            }
 
-    <!-- <script>
+            .loading-text {
+                font-size: 24px;
+                margin-top: 20px;
+                font-weight: bold;
+                color: #5f4dee;
+                text-align: center;
+                text-transform: uppercase;
+            }
+
+            .enter-loading {
+                animation: enter-loading 2s ease-in-out;
+                animation-fill-mode: forwards;
+            }
+
+            @keyframes enter-loading {
+                0% {
+                    opacity: 0;
+                    transform: translateY(-50px);
+                }
+
+                100% {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+        </style>
+
+        <div class="preloader" style="display:none;">
+            <div class="loader"></div>
+            <div class="loading-text enter-loading">Đang thực hiện tính toán</div>
+        </div>
+
+
+        <!-- end of tabs -->
+        <!-- Copyright -->
+        <div class="copyright">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <p class="p-small">Copyright &copy; 2023. All Rights Reserved.</a>
+                        </p>
+                    </div>
+                    <!-- end of col -->
+                </div>
+                <!-- enf of row -->
+            </div>
+            <!-- end of container -->
+        </div>
+        <!-- end of copyright -->
+        <!-- end of copyright -->
+
+
+        <!-- Scripts -->
+        <!-- <script src="{{ url_for('static',filename='js/jquery.min.js') }}">
+    </script> -->
+        <script src="{{ url_for('static',filename='js/popper.min.js') }}">
+        </script>
+        <script src="{{ url_for('static',filename='js/bootstrap.min.js') }}">
+        </script>
+        <script src="{{ url_for('static',filename='js/jquery.easing.min.js') }}">
+        </script>
+        <script src="{{ url_for('static',filename='js/swiper.min.js.js') }}">
+        </script>
+        <script src="{{ url_for('static',filename='js/jquery.magnific-popup.js') }}">
+        </script>
+        <script src="{{ url_for('static',filename='js/validator.min.js') }}">
+        </script>
+        <script src="{{ url_for('static',filename='js/scripts.js') }}">
+        </script>
+        <!--     <script src="https://cdn.jsdelivr.net/gh/reymon359/web-experiments/Social%20Signature/socialsignature.min.js"
+        crossorigin="anonymous"></script> -->
+        <script>
+            // $(function () {
+            //     $('#message').click(function () {
+            //         $("#message").val("")
+            //         $('textarea').highlightTextarea('destroy');
+            //     });
+            // });
+            function readURL(input) {
+                if (input.files && input.files[0]) {
+
+                    var reader = new FileReader();
+
+                    reader.onload = function (e) {
+                        $('.image-upload-wrap').hide();
+
+                        $('.file-upload-image').attr('src', e.target.result);
+                        $('.file-upload-content').show();
+
+                        $('.image-title').html(input.files[0].name);
+                    };
+
+                    reader.readAsDataURL(input.files[0]);
+
+                } else {
+                    removeUpload();
+                }
+            }
+
+            function removeUpload() {
+                $('.file-upload-input').replaceWith($('.file-upload-input').clone());
+                $('.file-upload-content').hide();
+                $('.image-upload-wrap').show();
+            }
+            $('.image-upload-wrap').bind('dragover', function () {
+                $('.image-upload-wrap').addClass('image-dropping');
+            });
+            $('.image-upload-wrap').bind('dragleave', function () {
+                $('.image-upload-wrap').removeClass('image-dropping');
+            });
+        </script>
+        <script type="text/javascript">
+            function notify() {
+                $.notify("Access granted", "success");
+            }
+
+        </script>
+        <script>
+            $(document).ready(function () {
+
+                $('#editModal').on('show.bs.modal', function (event) {
+
+                    var button = $(event.relatedTarget) // Button that triggered the modal
+
+                    var text = button.data('text') // Extract info from data-* attributes
+
+                    $('#myElement').html(htmlContent);
+                })
+            });
+        </script>
+        <script>
+              $(document).ready(function () {
+                  $("#message").on('keyup', function () {
+                      var words = 0;
+
+                      if ((this.value.match(/\S+/g)) != null) {
+                          words = this.value.match(/\S+/g).length;
+                          $('.count').text(words);
+                      }
+
+                      // if (words > 200) {
+                      //     toastr.error('Giới hạn tối đa là 200 từ.')
+                      //         // Split the string on first 200 words and rejoin on spaces
+                      //     var trimmed = $(this).val().split(/\s+/, 200).join(" ");
+                      //     // Add a space at the end to make sure more typing creates new words
+                      //     $(this).val(trimmed + " ");
+                      // } else {
+                      //     $('.count').text(words);
+                      //     $('#message').text(200 - words);
+                      // }
+                  });
+              });
+        </script>
+        <script>
+              if (window.history.replaceState) {
+                  window.history.replaceState(null, null, window.location.href);
+              }
+        </script>
+
+        <!-- <script>
         introJs().setOptions({
             steps: [
                 {
@@ -676,55 +717,55 @@
 
     </script> -->
 
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('#newsletterForm').on('submit', function (e) {
-                if ($('#message').val() == "") {
+        <script type="text/javascript">
+              $(document).ready(function () {
+                  $('#newsletterForm').on('submit', function (e) {
+                      if ($('#message').val() == "") {
 
-                } else {
-                    $(".preloader").show();
-                }
-                e.preventDefault();
-                $.ajax({
-                    data: {
-                        message: $('#message').val(),
-                    },
-                    type: 'POST',
-                    url: '/predict_news',
-                    success: function (predictResponse) {
-                        // Hiển thị kết quả từ AJAX thứ nhất
-                        $('.resu').html(predictResponse).show();
-                        $('.thead').show();
-                        console.log('Đã hoàn thành AJAX thứ nhất.');
+                      } else {
+                          $(".preloader").show();
+                      }
+                      e.preventDefault();
+                      $.ajax({
+                          data: {
+                              message: $('#message').val(),
+                          },
+                          type: 'POST',
+                          url: '/predict_news',
+                          success: function (predictResponse) {
+                              // Hiển thị kết quả từ AJAX thứ nhất
+                              $('.resu').html(predictResponse).show();
+                              $('.thead').show();
+                              console.log('Đã hoàn thành AJAX thứ nhất.');
 
-                        // Gọi AJAX thứ hai
-                        $.ajax({
-                            data: {
-                                message: $('#message').val(),
-                                predictResult: predictResponse,
-                            },
-                            type: 'POST',
-                            url: '/searchurl',
-                            success: function (searchResponse) {
-                                // Hiển thị kết quả từ AJAX thứ hai
-                                $('.results').html(searchResponse).show();
-                                $('.thead').show();
-                                console.log('Đã hoàn thành AJAX thứ hai.');
-                                $(".preloader").hide();
-                            },
-                            error: function (jqXHR, textStatus, errorThrown) {
-                                console.log('Lỗi AJAX thứ hai: ' + textStatus + ' - ' + errorThrown);
-                            }
-                        });
-                    },
-                    error: function (jqXHR, textStatus, errorThrown) {
-                        console.log('Lỗi AJAX thứ nhất: ' + textStatus + ' - ' + errorThrown);
-                    }
-                });
-            });
-        });
-    </script>
-    <script type="text/javascript">
+                              // Gọi AJAX thứ hai
+                              $.ajax({
+                                  data: {
+                                      message: $('#message').val(),
+                                      predictResult: predictResponse,
+                                  },
+                                  type: 'POST',
+                                  url: '/searchurl',
+                                  success: function (searchResponse) {
+                                      // Hiển thị kết quả từ AJAX thứ hai
+                                      $('.results').html(searchResponse).show();
+                                      $('.thead').show();
+                                      console.log('Đã hoàn thành AJAX thứ hai.');
+                                      $(".preloader").hide();
+                                  },
+                                  error: function (jqXHR, textStatus, errorThrown) {
+                                      console.log('Lỗi AJAX thứ hai: ' + textStatus + ' - ' + errorThrown);
+                                  }
+                              });
+                          },
+                          error: function (jqXHR, textStatus, errorThrown) {
+                              console.log('Lỗi AJAX thứ nhất: ' + textStatus + ' - ' + errorThrown);
+                          }
+                      });
+                  });
+              });
+        </script>
+        <!-- <script type="text/javascript">
         $(document).ready(function () {
             $('#newsletterForm').on('submit', function (e) {
                 $.ajax({
@@ -743,83 +784,83 @@
 
 
         });
-    </script>
-    <script>
-        var loadFile = function (event) {
-            var output = document.getElementById('output');
-            output.src = URL.createObjectURL(event.target.files[0]);
-            output.onload = function () {
-                URL.revokeObjectURL(output.src) // free memory
-            }
-        };
-    </script>
-    <script>
-        function Check2() {
-            let title = document.forms["formpost"]["title"].value;
-            let phone = document.forms["formpost"]["phone"].value;
-            let type = document.forms["formpost"]["type"].value;
-            let label = document.forms["formpost"]["label"].value;
-            let link = document.forms["formpost"]["link"].value;
-            let image_upload = document.forms["formpost"]["image_upload"].value;
-            let content = document.forms["formpost"]["content"].value;
+    </script> -->
+        <script>
+              var loadFile = function (event) {
+                  var output = document.getElementById('output');
+                  output.src = URL.createObjectURL(event.target.files[0]);
+                  output.onload = function () {
+                      URL.revokeObjectURL(output.src) // free memory
+                  }
+              };
+        </script>
+        <script>
+              function Check2() {
+                  let title = document.forms["formpost"]["title"].value;
+                  let phone = document.forms["formpost"]["phone"].value;
+                  let type = document.forms["formpost"]["type"].value;
+                  let label = document.forms["formpost"]["label"].value;
+                  let link = document.forms["formpost"]["link"].value;
+                  let image_upload = document.forms["formpost"]["image_upload"].value;
+                  let content = document.forms["formpost"]["content"].value;
 
-            if (title == "" && content == "" && phone == "" && link == "" && image_upload == "") {
-                Toastify({
-                    text: "Không được phép để trống!",
-                    duration: 5000,
-                    backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)",
+                  if (title == "" && content == "" && phone == "" && link == "" && image_upload == "") {
+                      Toastify({
+                          text: "Không được phép để trống!",
+                          duration: 5000,
+                          backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)",
 
-                }).showToast();
-            } else {
-                Toastify({
-                    text: "Tin của bạn sẽ được kiểm duyệt sau 24h!",
-                    duration: 100000
-                }).showToast();
+                      }).showToast();
+                  } else {
+                      Toastify({
+                          text: "Tin của bạn sẽ được kiểm duyệt dau 24h!",
+                          duration: 100000
+                      }).showToast();
 
-            }
+                  }
 
-        }
-    </script>
-    <script>
-        function Check() {
-            let message = document.forms["form1"]["message"].value;
-            if (message == "") {
-                Toastify({
-                    text: "Không được phép để trống!",
-                    duration: 3000,
-                    backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)",
+              }
+        </script>
+        <script>
+              function Check() {
+                  let message = document.forms["form1"]["message"].value;
+                  if (message == "") {
+                      Toastify({
+                          text: "Không được phép để trống!",
+                          duration: 3000,
+                          backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)",
 
-                }).showToast();
-            } else {
-                Toastify({
-                    text: "Đang thực hiện kiểm tra! Vui lòng đợi...",
-                    duration: 3000
-                }).showToast();
-                // setTimeout(
-                //     function () {
-                //         $('textarea').highlightTextarea({
-                //             words: ['canh chua', 'cá lóc','tin giả'],
-                //             color: '#ffc9c9'
-                //         });
+                      }).showToast();
+                  } else {
+                      Toastify({
+                          text: "Đang thực hiện kiểm tra! Vui lòng đợi...",
+                          duration: 3000
+                      }).showToast();
+                      // setTimeout(
+                      //     function () {
+                      //         $('textarea').highlightTextarea({
+                      //             words: ['canh chua', 'cá lóc','tin giả'],
+                      //             color: '#ffc9c9'
+                      //         });
 
-                //     }, 3000);
+                      //     }, 3000);
 
-            }
+                  }
 
-        }
-    </script>
-    {% if not mess %}
-    {% else%}
-    <script>
-        function Submit() {
-            Toastify({
-                text: "Gửi ok",
-                duration: 3000
-            }).showToast();
-        }
-        Submit()
-    </script>
-    {% endif %}
+              }
+        </script>
+        {% if not mess %}
+        {% else%}
+        <script>
+              function Submit() {
+                  Toastify({
+                      text: "Gửi ok",
+                      duration: 3000
+                  }).showToast();
+              }
+              Submit()
+        </script>
+        {% endif %}
 </body>
 
 </html>
