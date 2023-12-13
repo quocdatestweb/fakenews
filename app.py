@@ -32,13 +32,15 @@ import random
 from werkzeug.utils import secure_filename
 from bs4 import BeautifulSoup
 import threading
+from newspaper import Article
 
 
 
 
 tfvect = TfidfVectorizer(analyzer='word', max_features=4189, ngram_range=(1, 2))
 loaded_model = pickle.load(open('model/model.pkl', 'rb'))
-dataframe = pd.read_csv('data_new.csv',on_bad_lines='skip')
+# dataframe = pd.read_csv('data_new.csv',on_bad_lines='skip')
+dataframe = pd.read_csv('data_new.csv',error_bad_lines=False)
 dataframe.reset_index(inplace = True)
 dataframe.drop(["index"], axis = 1, inplace = True)
 
@@ -299,6 +301,182 @@ def predicts():
         return links_html
 
 
+# @app.route('/searchurl', methods=['GET', 'POST'])
+# def searchurl():
+#     if ((request.method == 'POST') and (request.form['message'] != "")):
+#         query = request.form['message']
+#         domains = ['thethao247.vn', 'chinhphu.vn', 'nld.com.vn', 'plo.vn', 'vtc.vn', 'tienphong.vn', 'quochoi.vn', 'baochinhphu.vn', 'laodong.vn',  'vietnamnet.vn', 'suckhoedoisong.vn', 'tuoitre.vn', 'thanhnien.vn', 'vov.vn', 'doisongphapluat.vn', 'hanoimoi.com.vn', 'tapchicongsan.org', 'hochiminh.org', 'nhandan.com.vn','baophapluat.vn', 'baodautu.vn', 'vnmedia.vn', 'giaoducthoidai.vn', 'baodansinh.vn', 'vanhien.vn', 'dantri.com.vn', 'baomoi.com', 'bnews.vn', 'dantocmiennui.vn', 'vnanet.vn', 'vietnam.vnanet.vn', 'cucnghethuatbieudien.gov.vn', 'moh.gov.vn', 'covid19.gov.vn']
+#         random.shuffle(domains)
+#         site_query = ' OR '.join([f'site:{domain}' for domain in domains])
+#         search_query = query.replace(" ", "+") + " " + site_query
+
+#         links = []
+#         for i, link in enumerate(search(search_query)):
+#             if link.endswith('/'):
+#                 link = link[:-1]
+#             links.append(f'<tr><td>{i+1}</td><td><a href="{link}">{link}</a></td></tr>')
+#             if i == 4:
+#                 break
+
+#         links_html = ''.join(links)
+#     return links_html
+
+# @app.route('/searchurl', methods=['GET', 'POST'])
+# def searchurl():
+#     if ((request.method == 'POST') and (request.form['message'] != "")):
+#         query = request.form['message']
+#         headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36'}
+#         domains = ['thethao247.vn', 'chinhphu.vn', 'nld.com.vn', 'plo.vn', 'vtc.vn', 'tienphong.vn', 'quochoi.vn', 'baochinhphu.vn', 'laodong.vn',  'vietnamnet.vn', 'suckhoedoisong.vn', 'tuoitre.vn', 'thanhnien.vn', 'vov.vn', 'doisongphapluat.vn', 'hanoimoi.com.vn', 'tapchicongsan.org', 'hochiminh.org', 'nhandan.com.vn','baophapluat.vn', 'baodautu.vn', 'vnmedia.vn', 'giaoducthoidai.vn', 'baodansinh.vn', 'vanhien.vn', 'dantri.com.vn', 'baomoi.com', 'bnews.vn', 'dantocmiennui.vn', 'vnanet.vn', 'vietnam.vnanet.vn', 'cucnghethuatbieudien.gov.vn', 'moh.gov.vn', 'covid19.gov.vn']
+#         random.shuffle(domains)
+#         site_query = ' OR '.join([f'site:{domain}' for domain in domains])
+#         search_query = query.replace(" ", "+") + " " + site_query
+#         links = []
+#         for i, link in enumerate(search(search_query)):
+#             if link.endswith('/'):
+#                 link = link[:-1]
+#             links.append(f'<tr><td>{i+1}</td><td><a href="{link}">{link}</a></td></tr>')
+#             if i == 4:
+#                 break
+
+#         article_data_list = []
+
+#         session = requests.Session()
+
+#         for article_url in links:
+#             try:
+#                 response = session.get(article_url, headers=headers, timeout=10)
+                
+#                 if response.status_code == 200:
+#                     article = Article(article_url)
+#                     article.download()
+#                     article.parse()
+                    
+#                     article_data = {
+#                         'url': article_url,
+#                         'title': article.title,
+#                         'text': article.text
+#                     }
+                    
+#                     article_data_list.append(article_data)
+                    
+#                     print(f"Title: {article.title}")
+#                     print(f"Text: {article.text}")
+                    
+#                 else:
+#                     print(f"Failed to fetch article at {article_url}")
+#             except Exception as e:
+#                 print(f"Error occurred while fetching article at {article_url}: {e}")
+
+#             # Introduce a delay between requests to avoid being detected as a bot
+#             time.sleep(10)  # Adjust the delay time as needed
+#             # Now you have a list of dictionaries, where each dictionary represents the data of one article
+#         linkss = []
+#         for i, article_data in enumerate(article_data_list):
+#             linkss.append(f'<tr><td>{i+1}</td><td><a href="{article_data["url"]}">{article_data["url"]}</a></td><td><a href="{article_data["url"]}">{article_data["text"]}</a></td></tr>')
+#         links_html = ''.join(linkss)
+    
+#     return links_html
+
+# @app.route('/searchurl', methods=['GET', 'POST'])
+# def searchurl():
+#     if ((request.method == 'POST') and (request.form['message'] != "")):
+#         query = request.form['message']
+#         headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36'}
+#         domains = ['thethao247.vn', 'chinhphu.vn', 'nld.com.vn', 'plo.vn', 'vtc.vn', 'tienphong.vn', 'quochoi.vn', 'baochinhphu.vn', 'laodong.vn',  'vietnamnet.vn', 'suckhoedoisong.vn', 'tuoitre.vn', 'thanhnien.vn', 'vov.vn', 'doisongphapluat.vn', 'hanoimoi.com.vn', 'tapchicongsan.org', 'hochiminh.org', 'nhandan.com.vn','baophapluat.vn', 'baodautu.vn', 'vnmedia.vn', 'giaoducthoidai.vn', 'baodansinh.vn', 'vanhien.vn', 'dantri.com.vn', 'baomoi.com', 'bnews.vn', 'dantocmiennui.vn', 'vnanet.vn', 'vietnam.vnanet.vn', 'cucnghethuatbieudien.gov.vn', 'moh.gov.vn', 'covid19.gov.vn']
+#         random.shuffle(domains)
+#         site_query = ' OR '.join([f'site:{domain}' for domain in domains])
+#         search_query = query.replace(" ", "+") + " " + site_query
+#         links = []
+#         for i, link in enumerate(search(search_query)):
+#             if link.endswith('/'):
+#                 link = link[:-1]
+#             links.append(link)
+#             if i == 4:
+#                 break
+
+#         article_data_list = []
+
+#         session = requests.Session()
+
+#         for article_url in links:
+#             try:
+#                 response = session.get(article_url, headers=headers, timeout=10)
+                
+#                 if response.status_code == 200:
+#                     article = Article(article_url)
+#                     article.download()
+#                     article.parse()
+                    
+#                     article_data = {
+#                         'url': article_url,
+#                         'title': article.title,
+#                         'text': article.text
+#                     }
+                    
+#                     article_data_list.append(article_data)
+                    
+#                     print(f"Title: {article.title}")
+#                     print(f"Text: {article.text}")
+                    
+#                 else:
+#                     print(f"Failed to fetch article at {article_url}")
+#             except Exception as e:
+#                 print(f"Error occurred while fetching article at {article_url}: {e}")
+
+#             # Introduce a delay between requests to avoid being detected as a bot
+#             time.sleep(10)  # Adjust the delay time as needed
+#             # Now you have a list of dictionaries, where each dictionary represents the data of one article
+#         linkss = []
+#         for i, article_data in enumerate(article_data_list):
+#            linkss.append(f'<tr> <td>{i+1}</td> <td><a href="{article_data["url"]}">{article_data["url"]}</a> </td> </tr>')
+#         links_html = ''.join(linkss)
+    
+#         return links_html
+
+#     return ""
+
+
+headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36'}
+
+def extract_domain(url):
+    domain = re.sub(r"https?://", "", url)
+    slash_index = domain.find("/")
+    return domain[:slash_index]
+
+article_data_list = []
+def fetch_article_data(article_url):
+    session = requests.Session()
+
+    response = session.get(article_url, headers=headers, timeout=10)
+
+    if response.status_code == 200:
+        article = Article(article_url)
+        article.download()
+        article.parse()
+
+    return article_url, article.title, article.text
+
+def calculate_similarity_percentage(string_input, string):
+    words_input = set(string_input.lower().split())
+    words_string = set(string.lower().split())
+    
+    common_words = words_input.intersection(words_string)
+    similarity_percentage = len(common_words) / len(words_input) * 100 if len(words_input) > 0 else 0
+    
+    return similarity_percentage
+
+def find_most_similar_strings(string_input, list_of_strings, n=3):
+    similarities = []
+    
+    for string in list_of_strings:
+        similarity_percentage = calculate_similarity_percentage(string_input, string)
+        similarities.append((string, similarity_percentage))
+    
+    sorted_similarities = sorted(similarities, key=lambda x: x[1], reverse=True)
+    most_similar_strings = [string for string, _ in sorted_similarities[:n]]
+    
+    return most_similar_strings
+
 @app.route('/searchurl', methods=['GET', 'POST'])
 def searchurl():
     if ((request.method == 'POST') and (request.form['message'] != "")):
@@ -307,19 +485,36 @@ def searchurl():
         random.shuffle(domains)
         site_query = ' OR '.join([f'site:{domain}' for domain in domains])
         search_query = query.replace(" ", "+") + " " + site_query
-
         links = []
         for i, link in enumerate(search(search_query)):
             if link.endswith('/'):
                 link = link[:-1]
-            links.append(f'<tr><td>{i+1}</td><td><a href="{link}">{link}</a></td></tr>')
+            links.append(link)
             if i == 4:
                 break
+        linkss = []
+        for i in range(0, 3):
+            link, title, content = fetch_article_data(links[i])
+            # print(link)
+            # print(query)
+            # print(title)
+            link_domain  = extract_domain(link)
+            x = find_most_similar_strings(query, content.replace("\n\n", ".").split("."), 3)
+            # print(x)
+            list_content = find_most_similar_strings(query, content.replace("\n\n", ".").split("."), 3)
+            # print(calculate_similarity_percentage(query, x[0]))
+            similarity = calculate_similarity_percentage(query, x[0])
+            simi = round(similarity)
+            linkss.append(f'<tr> <td>{i+1}</td> <td>{link_domain}</td><td><a href="{link}">{title}</a></td><td>{list_content}</td><td>{simi}</td> </tr>')
 
-        links_html = ''.join(links)
-    return links_html
+            time.sleep(10)
+        # for i, article_data in enumerate(article_data_list):
+        #    linkss.append(f'<tr> <td>{i+1}</td> <td><a href="{article_data["url"]}">{article_data["url"]}</a> </td> </tr>')
+        links_html = ''.join(linkss)
+    
+        return links_html
 
-
+    return ""
 
 @app.route("/login/")
 def login():
@@ -800,3 +995,9 @@ def run_flask():
 if __name__ == '__main__':
     flask_thread = threading.Thread(target=run_flask)
     flask_thread.start()
+
+# if __name__ == '__main__':
+#     app.run(debug=True)
+
+# if __name__ == '__main__':
+#     app.run(debug=True, port=5001)
